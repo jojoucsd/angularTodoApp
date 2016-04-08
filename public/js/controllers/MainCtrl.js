@@ -30,6 +30,7 @@ angular.module('basic-auth')
           $auth.setToken(response);
           $scope.isAuthenticated();
           $scope.user = {};
+          $location.path('/profile');
         })
         .catch(function(response) {
           console.log(response)
@@ -42,6 +43,7 @@ angular.module('basic-auth')
           $auth.setToken(response.data.token);
           $scope.isAuthenticated();
           $scope.user = {};
+          $location.path('/profile')
         })
         .catch(function(response) {
           console.log(response)

@@ -40,6 +40,7 @@ app.get('/', resources.index);
 app.get('/templates/:name', resources.templates);
 require('./resources/users')(app);
 require('./resources/posts')(app);
+require('./resources/apis')(app);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', resources.index);

@@ -16,6 +16,11 @@ angular.module('basic-auth', ['basic-auth.services',
         controller: 'ProfileCtrl'
       });
 
+      $routeProvider.when('/search', {
+        templateUrl: 'templates/search',
+        controller: 'SearchCtrl'
+      });
+
       $routeProvider.otherwise({redirectTo: '/'});
 
       $locationProvider.html5Mode(true);
