@@ -9,19 +9,24 @@ angular.module('basic-auth')
   });
 
     $scope.createPost = function() {
+        // console.log('post', post );
     	$http.post('/api/posts', $scope.post)
+        // console.log('$scope.post', $scope.post)
       .success(function(response) {
+        console.log('response', response)
          $scope.user.posts.unshift(response);
      })
       .error(function(response) {
-         console.log(response)
+         console.log('err', response)
+
      })
-    $scope.post = {};
+    // $scope.post = {};
   }
   $scope.deletePost = function(post) {
+    console.log(post);
     $http.delete('/api/posts/' + post._id)
     .success(function(response){
-        console.log(response)
+        // console.log(response)
         var index= $scope.user.posts.indexOf(post)
         $scope.user.posts.splice(index, 1);
     })
