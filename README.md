@@ -1,4 +1,4 @@
-# MEAN Auth Seed
+# Ling's Angular todoApp
 
 ## What's inside
 
@@ -22,4 +22,4 @@
 
 
 
-# mean-auth-html
+# Going to add Angular ui calendar and features as process.
