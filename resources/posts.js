@@ -6,8 +6,10 @@ module.exports = function(app) {
 	app.post('/api/posts', auth.ensureAuthenticated, function (req,res) {
 		User.findById(req.userId).exec(function(err, user) {
 			var post = new Post(req.body);
+			// console.log(post);
 			post.save(function(err, post) {
 				user.posts.unshift(post._id);
+				// user.unshift(user._id);
 				user.save();
 				res.send(post);				
 			});
@@ -31,24 +33,27 @@ module.exports = function(app) {
 	})
 
 	  // delete one post by id
-	  app.delete('/api/posts/:post_id', auth.ensureAuthenticated, function(req,res) {
-	  	// console.log('request hits here');  
-	  	// console.log('req', req.body); 
-	  	// User.findById(req.userId).exec(function (err, user) {
-	  	// 	Post.remove({
-	  	// 		_id :req.params.post_id
-	  	// 	}, function(err, post){
-	  	// 		if (err) { 
-	  	// 			console.log(err)
-	  	// 			return res.send(err);
-	  	// 		}
-	  	// 		console.log(post)
-	  	// 		res.status(200).send('Success');
-	  	// 	})
-	  	// });
-	  	Post.findByIdAndRemove(req.params.post_id, function (err, post) {
-	  	  if (err) { return res.send(err); }
-	  	  res.status(200).send('Success');
+	  app.delete('/api/posts/:post_id', auth.ensureAuthenticated, function(req,res) { 
+	  	User.findById(req.userId).exec(function (err, user) {
+	  		console.log(user)
+	  		Post.remove({
+	  			_id :req.params.post_id
+	  		}, function(err, post){
+	  			if (err) { 
+	  				console.log(err)
+	  				return res.send(err);
+	  			}
+	  			console.log(post)
+	  			res.status(200).send('Success');
+	  		})
 	  	});
+	  	// User.Post.findByIdAndRemove(req.params.post_id, function (err, user, post){
+	  	// 	if(err) {return res.send(err);}
+	  	// 	res.status(200).send('Find User and deleted Post');
+	  	// })
+	  	// Post.findByIdAndRemove(req.params.post_id, function (err, post) {
+	  	//   if (err) { return res.send(err); }
+	  	//   res.status(200).send('Success');
+	  	// });
 	  });
 	}
