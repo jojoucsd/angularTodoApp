@@ -4,6 +4,7 @@ var Post = require('../models/post.js')
 
 module.exports = function(app) {
 	app.post('/api/posts', auth.ensureAuthenticated, function (req,res) {
+		console.log(req.body)
 		User.findById(req.userId).exec(function(err, user) {
 			var post = new Post(req.body);
 			// console.log(post);
@@ -33,27 +34,28 @@ module.exports = function(app) {
 	})
 
 	  // delete one post by id
-	  app.delete('/api/posts/:post_id', auth.ensureAuthenticated, function(req,res) { 
-	  	User.findById(req.userId).exec(function (err, user) {
-	  		console.log(user)
+	  app.delete('/api/posts/:post_id', auth.ensureAuthenticated, function(req,res) {
+	  	// console.log(req.body); 
+	  	User.findById(req.user).exec(function (err, user) {
 	  		Post.remove({
-	  			_id :req.params.post_id
+	  			_id : req.params.post_id
 	  		}, function(err, post){
 	  			if (err) { 
 	  				console.log(err)
 	  				return res.send(err);
 	  			}
-	  			console.log(post)
-	  			res.status(200).send('Success');
+	  			console.log(req.query.body)
+	  			User.findOneAndUpdate(
+	  				{ posts: req.params.post_id},
+	  				{ "$pull": {"posts": req.params.post_id}},
+	  				function (err, post){
+	  					if(err) {return res.send(err);}
+	  					else{
+	  						console.log("OBjectID", post);
+	  						res.status(200).send('Find User and deleted Post');
+	  					}  					
+	  				})
 	  		})
 	  	});
-	  	// User.Post.findByIdAndRemove(req.params.post_id, function (err, user, post){
-	  	// 	if(err) {return res.send(err);}
-	  	// 	res.status(200).send('Find User and deleted Post');
-	  	// })
-	  	// Post.findByIdAndRemove(req.params.post_id, function (err, post) {
-	  	//   if (err) { return res.send(err); }
-	  	//   res.status(200).send('Success');
-	  	// });
 	  });
 	}

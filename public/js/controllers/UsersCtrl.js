@@ -10,9 +10,16 @@ angular.module('basic-auth')
   });
 
     $scope.createPost = function(user) {
+      // console.log(user);
+      var config = {
+        user: user._id,
+        title: $scope.post.title,
+        body: $scope.post.body
+      };
+      // console.log(config)
       // console.log('user', user._id)
-      console.log('scope.post', $scope.post)
-    	$http.post('/api/posts', $scope.post)
+      // console.log('scope.post', $scope.post)
+    	$http.post('/api/posts', config)
       .success(function(response) {
         console.log('response', response)
          $scope.user.posts.unshift(response);
