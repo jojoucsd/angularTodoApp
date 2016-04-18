@@ -12,6 +12,11 @@
     <span class="day">Fri</span>
     <span class="day">Sat</span>
 </div>
-<div class="week" ng-repeat="week in weeks">
+<div class="week" ng-repeat="week in weeks" ng-click="selectedDate()">
     <span class="day" ng-class="{ today: day.isToday, 'different-month': !day.isCurrentMonth, selected: day.date.isSame(selected) }" ng-click="select(day)" ng-repeat="day in week.days">{{day.number}}</span>
 </div>
+
+<div class='footer'>
+    <span>Selected: {{selected._d}}</span>
+</div>
+

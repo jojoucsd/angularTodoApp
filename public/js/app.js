@@ -17,7 +17,7 @@ angular.module('basic-auth', ['basic-auth.services',
       });
 
       // $routeProvider.when('/profile', {
-      //   templateUrl: 'templates/profile',
+      //   templateUrl: 'templates/_calendarView.html',
       //   controller: 'CalendarCtrl'
       // });
 

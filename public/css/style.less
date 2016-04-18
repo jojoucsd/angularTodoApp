@@ -23,7 +23,9 @@ calendar {
     @secondary-colour:#2875C7;
     @spacing:10px;
     @icon-width:40px;
+    @date-width:1px;
     @header-height:40px;
+    @footer-height:40px;
 
     >div.header {
         float:left;
@@ -69,6 +71,30 @@ calendar {
             color:inherit;
         }
     }
+    >div.footer {
+            float:left;
+            width:100%;
+            background:@secondary-colour;
+            height:@footer-height;
+            color:white;
+            
+            >* { 
+                .vertical-centre(@header-height);
+            }
+            
+            >span { 
+                float:left;
+                width:100%;
+                font-weight:bold;
+                text-transform:uppercase;
+                .border-box;
+                padding-left:@date-width;
+                margin-left:@date-width;
+                text-align:center;
+                padding-right:@date-width;
+                color:white;
+            }
+        }
     >div.week {
         float:left;
         width:100%;

@@ -18,7 +18,8 @@ angular.module('basic-auth')
             _buildMonth(scope, start, scope.month);
 
             scope.select = function(day) {
-                scope.selected = day.date;  
+                scope.selected = day.date;
+                console.log('selected', day.date._d)  
             };
 
             scope.next = function() {
@@ -68,17 +69,3 @@ angular.module('basic-auth')
         return days;
     }
   });
-
-// function cardView(){
-//   var directive = {};
-
-//   //'A' == attribute, 'E' == element, 'C' == class
-//   directive.restrict = 'E';
-//   directive.replace = false;
-//   directive.templateUrl =  "templates/_cardView.html";
-//   directive.scope = {
-//       question: '@'
-//   };
-//   return directive;
-// }
-
