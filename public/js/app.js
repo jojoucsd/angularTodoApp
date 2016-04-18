@@ -16,6 +16,11 @@ angular.module('basic-auth', ['basic-auth.services',
         controller: 'ProfileCtrl'
       });
 
+      // $routeProvider.when('/profile', {
+      //   templateUrl: 'templates/profile',
+      //   controller: 'CalendarCtrl'
+      // });
+
       $routeProvider.when('/search', {
         templateUrl: 'templates/search',
         controller: 'SearchCtrl'
@@ -25,3 +30,4 @@ angular.module('basic-auth', ['basic-auth.services',
 
       $locationProvider.html5Mode(true);
     }]);
+

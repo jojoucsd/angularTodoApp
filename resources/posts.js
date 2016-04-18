@@ -36,7 +36,7 @@ module.exports = function(app) {
 	  // delete one post by id
 	  app.delete('/api/posts/:post_id', auth.ensureAuthenticated, function(req,res) {
 	  	// console.log(req.body); 
-	  	User.findById(req.user).exec(function (err, user) {
+	  	// User.findById(req.user).exec(function (err, user) {
 	  		Post.remove({
 	  			_id : req.params.post_id
 	  		}, function(err, post){
@@ -56,6 +56,6 @@ module.exports = function(app) {
 	  					}  					
 	  				})
 	  		})
+
 	  	});
-	  });
 	}
