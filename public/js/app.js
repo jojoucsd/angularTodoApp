@@ -4,7 +4,8 @@
 angular.module('basic-auth', ['basic-auth.services',
                               'ngRoute',
                               'ngResource',
-                              'satellizer'])
+                              'satellizer',
+                              'basic-auth.calendar'])
 
     .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
       $routeProvider.when('/', {

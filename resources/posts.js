@@ -16,6 +16,9 @@ module.exports = function(app) {
 			});
 		})
 	})
+	app.post('/api/posts/:date', function(req,res){
+		console.log(req);
+	})
 	app.get('api/posts/:post_id', auth.ensureAuthenticated, function (req,res) {
 		User.findById(req.userId).exec(function (err, user) {
 			Post.findById(req.params.post_id, function(err, post) {

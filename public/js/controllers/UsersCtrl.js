@@ -5,7 +5,11 @@
 angular.module('basic-auth')
 .controller('ProfileCtrl', ['$scope', '$http', '$auth', 'Auth', function($scope, $http, $auth, Auth) {
   $scope.day = moment ()
-  // console.log('$scope.day', $scope.day)
+  console.log('$scope.day', $scope.day)
+  $scope.dateSelected = function(){
+    console.log()
+  }
+
   $http.get('/api/me').success(function(data) {
     $scope.user = data;
       // console.log('$scope', $scope.user)

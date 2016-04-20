@@ -1,4 +1,6 @@
-angular.module('basic-auth')
+'use strict';
+
+angular.module('basic-auth.calendar', [])
   .directive('calendar', function (){
     return {
         restrict: "E",
@@ -19,7 +21,7 @@ angular.module('basic-auth')
 
             scope.select = function(day) {
                 scope.selected = day.date;
-                console.log('selected', day.date._d)  
+                console.log('selected', day.date._d) 
             };
 
             scope.next = function() {
