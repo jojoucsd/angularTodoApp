@@ -7,7 +7,8 @@ angular.module('basic-auth.calendar', [])
         templateUrl: "templates/_calendarView.html",
         replace: false,
         scope: {
-            selected: "="
+            selected: "=",
+            add: '&',
         },
         link: function(scope) {
             scope.selected = _removeTime(scope.selected || moment());
@@ -21,7 +22,12 @@ angular.module('basic-auth.calendar', [])
 
             scope.select = function(day) {
                 scope.selected = day.date;
-                console.log('selected', day.date._d) 
+                scope.addDate =function (){
+                    var date = "Date Customer picked by Directive";
+                    scope.add({ date: date})
+                    console.log('date', date)
+                }
+                // console.log('selected', day.date._d) 
             };
 
             scope.next = function() {

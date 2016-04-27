@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-sm-5"><br/>
       <h4>{{user.first}} {{user.last}}</h4>
-      <calendar ng-click = dateSelected()></calendar>
+      <calendar></calendar>
+      <div isolated-scope-with-controller datasource="customers" add="addCustomer(name)"></div>
     </div>
     <div class="col-sm-7">
       <div class="page-header">
@@ -20,11 +21,18 @@
         <button type="submit">Save</button>
       </form>
       <hr>
+      <form class='post-search'>
+        <div class="input-append">
+          <input type="text" ng-model="search" class="search-query">
+          <button type="submit" class="btn">Search</button>
+        </div>
+      </form>
       <ul class='list-group'>
         <div class='row'>
-          <div class='col-sm-4 col-md-3 col-lg-2' ng-repeat="post in user.posts">
+          <div ng-animate="'animate'" class='col-sm-4 col-md-3 col-lg-2' ng-repeat="post in user.posts | filter: search" >
           <h3>{{post.title}}</h3>
           <p>{{post.body}}</p>
+          <p>Created Date: {{post.created_at}}</p>
           <a href="#" class='pull-right' ng-click="deletePost(post)">
             <i class='icon ion-close-circled'></i>
             </a>

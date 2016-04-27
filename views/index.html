@@ -13,6 +13,27 @@
     <link rel="stylesheet/less" type="text/css" href="/css/style.less" />
   </head>
   <body ng-controller="MainCtrl">
+  <!-- FACEBOOK SDK -->
+     <div id="fb-root"></div>
+     <script>
+       window.fbAsyncInit = function() {
+           FB.init({
+             appId      : '1709349286019442',
+             xfbml      : true,
+             version    : 'v2.6'
+           });
+           FB.XFBML.parse();
+         };
+
+        (function(d, s, id) {
+
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) return;
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+      </script>
     <ng-include src="'templates/navbar'"></ng-include>
     <div ng-view="ng-view"></div>
 

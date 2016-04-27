@@ -17,11 +17,6 @@ angular.module('basic-auth', ['basic-auth.services',
         controller: 'ProfileCtrl'
       });
 
-      // $routeProvider.when('/profile', {
-      //   templateUrl: 'templates/_calendarView.html',
-      //   controller: 'CalendarCtrl'
-      // });
-
       $routeProvider.when('/search', {
         templateUrl: 'templates/search',
         controller: 'SearchCtrl'
@@ -29,6 +24,22 @@ angular.module('basic-auth', ['basic-auth.services',
 
       $routeProvider.otherwise({redirectTo: '/'});
 
-      $locationProvider.html5Mode(true);
-    }]);
+    }])
+
+    .config(function($authProvider, $windowProvider) {
+
+         var $window = $windowProvider.$get();
+         if ($window.location.host == 'localhost:1337') {
+           console.log('development app');
+           $authProvider.facebook({        
+             clientId: '1709349286019442'
+           });
+
+         } else {
+           console.log('production app');
+           $authProvider.facebook({        
+             clientId: '1709349286019442'
+           });
+         }
+       });
 

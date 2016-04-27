@@ -3,7 +3,7 @@
 /* MAIN Controller */
 
 angular.module('basic-auth')
-  .controller('MainCtrl', ['$scope', '$rootScope', '$location', '$auth', '$http',  function ($scope, $rootScope, $location, $auth, $http) {
+  .controller('MainCtrl', ['$scope', '$rootScope', '$location', '$auth', '$http', 'Auth', '$route', function ($scope, $rootScope, $location, $auth, $http, Auth, $route) {
 
     // LOGIN/REGISTER
     $scope.user = {};
@@ -58,4 +58,20 @@ angular.module('basic-auth')
           $location.path('/')
         });
     };
+
+    //Facebook Login
+
+    $scope.authenticate = function(provider) {
+         $auth.authenticate(provider).then(function() {
+           console.log('auth.cu is: ', Auth.currentUser);
+           $scope.currentUser = Auth.currentUser();
+           $scope.user = $scope.currentUser;
+           console.log('navbar currentuser is: ', $scope.user);
+           $('#login-modal').modal('hide');
+           if($route.current.loadedTemplateUrl === 'templates/splash'){
+            $location.path('/profile');
+           }
+           $location.path('/profile'); 
+         });
+       };
   }]);

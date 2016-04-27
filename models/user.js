@@ -10,11 +10,14 @@ function toLower (v) {
 var UserSchema = new Schema({
     created_at    : { type: Date }
   , updated_at    : { type: Date }
-  , email         : { type: String, required: true, unique: true, trim: true, set: toLower }
+  , email         : { type: String, unique: true, trim: true, set: toLower }
   , password      : { type: String, select: false }
   , first         : { type: String, trim: true }
   , last          : { type: String, trim: true }
   , posts         : [{ type: Schema.Types.ObjectId, ref: 'Post' }]
+  , displayName   : { type: String, trim: true}
+  , facebook      : { type: String }
+  , pictures      : { type: String }
 })
 
 UserSchema.virtual('fullname').get(function() {
