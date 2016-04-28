@@ -34,11 +34,17 @@ angular.module('basic-auth', ['basic-auth.services',
            $authProvider.facebook({        
              clientId: '1709349286019442'
            });
+           $authProvider.google({
+            clientId: '904208969176-6cdnvqnealq1ho63lddcjf8a797aqq0v.apps.googleusercontent.com'
+           });
 
          } else {
            console.log('production app');
            $authProvider.facebook({        
              clientId: '1709349286019442'
+           });
+           $authProvider.google({
+            clientId: '904208969176-6cdnvqnealq1ho63lddcjf8a797aqq0v.apps.googleusercontent.com'
            });
          }
        });

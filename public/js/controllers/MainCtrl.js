@@ -59,7 +59,7 @@ angular.module('basic-auth')
         });
     };
 
-    //Facebook Login
+    //Facebook, Google Login
 
     $scope.authenticate = function(provider) {
          $auth.authenticate(provider).then(function() {
