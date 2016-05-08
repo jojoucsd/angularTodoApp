@@ -10,6 +10,15 @@ var PostSchema = Schema({
 });
 
 // MIDDLEWARE
+PostSchema.pre('save', function(next){
+	//set create and update
+	now = new Date();
+	this.updated_at = now;
+	if (!this.created_at) {
+		this.created_at = now;
+	}
+	next();
+});
 
 var Post = mongoose.model('Post', PostSchema);
 

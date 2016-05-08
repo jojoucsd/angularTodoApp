@@ -28,12 +28,14 @@ module.exports = function(app) {
 		})
 	})
 	app.put('/api/posts/:post_id', auth.ensureAuthenticated, function(req,res){ 
-		User.findById(req.userId).exec(function (err, user) {
-			Post.findOneAndUpdate({ _id: req.params.post_id}, req.query.post, function (err, post) {
-				if (err) { return res.send(err); }
-				res.send(post);
-			});
-		})
+		console.log('putroute', req.body);
+		console.log('postId', req.params.post_id);
+		Post.findOneAndUpdate({ _id: req.params.post_id}, req.body , function (err, post) {
+			// console.log("editRoute", post);
+			if (err) { return res.send(err); }
+			// console.log('backend',post);
+			res.send(post);
+		});
 	})
 
 	  // delete one post by id
@@ -59,6 +61,5 @@ module.exports = function(app) {
 	  					}  					
 	  				})
 	  		})
-
 	  	});
 	}

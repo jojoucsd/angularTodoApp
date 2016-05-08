@@ -3,12 +3,29 @@
 /* USER Controllers */
 
 angular.module('basic-auth')
-.controller('ProfileCtrl', ['$scope', '$http', '$auth', 'Auth', function($scope, $http, $auth, Auth) {
-  $scope.day = moment ()
-  console.log('$scope.day', $scope.day._d)
-  $scope.dateSelected = function(){
-    console.log()
-  }
+.controller('UsersCtrl', ['$scope', '$http', '$auth', 'Auth', function($scope, $http, $auth, Auth) {
+  
+  var now = moment()
+  $scope.day = now.format('YYYY-MM-DD');
+  $scope.day = '';
+  // console.log($scope.day);
+  // console.log('UserCtrl', $scope.day)
+  // var date = moment().format('YYYY-MM-DD');
+  // console.log("new day", date);
+  // $scope.day = date;
+  // console.log('$scope.day', $scope.day._d)
+  // $scope.select = function(pDate){
+  //   // console.log('moment', day._d)
+  //   var selectedDate = pDate;
+  //   console.log(selectedDate);
+  //   var pickedDate = moment(selectedDate).format("YYYY-MM-DD");
+  //   // console.log(pickedDate);
+  //   // return pickedDate;
+  //   // var pickedDate = [];
+  //   // pickedDate.push(moment(day).format("YYYY-MM-DD"));
+  //   // console.log(pickedDate);
+  // }
+
 
   $http.get('/api/me').success(function(data) {
     $scope.user = data;
@@ -35,6 +52,28 @@ angular.module('basic-auth')
      })
     // $scope.post = {};
   }
+
+  // $scope.editPost = function(post){
+  //   // console.log('post', post)
+  //   $scope.post = {
+  //     user: post.user[0],
+  //     _id: post._id,
+  //     title: post.title,
+  //     body: post.body
+  //   }
+  //   console.log('edit', $scope.post);
+  // }
+
+  $scope.updatePost = function(post){
+    console.log('update', post)
+    $http.put('/api/posts/'+ post._id, post)
+    .success(function(response){
+      console.log(response)
+      post.editForm = false;
+    })
+    // console.log('edit', post);
+  };
+
   $scope.deletePost = function(post) {
     console.log(post);
     $http.delete('/api/posts/' + post._id)

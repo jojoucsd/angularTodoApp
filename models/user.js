@@ -10,11 +10,13 @@ function toLower (v) {
 var UserSchema = new Schema({
     created_at    : { type: Date }
   , updated_at    : { type: Date }
-  , email         : { type: String, unique: true, spase: true, trim: true, set: toLower }
+  , email         : { type: String, unique: true, sparse: true, trim: true, set: toLower }
   , password      : { type: String, select: false }
   , first         : { type: String, trim: true }
   , last          : { type: String, trim: true }
   , posts         : [{ type: Schema.Types.ObjectId, ref: 'Post' }]
+  , notes         : [{ type: Schema.Types.ObjectId, ref: 'Note'}]
+  , events        : [{ type: Schema.Types.ObjectId, ref: 'Event'}]
   , displayName   : { type: String, trim: true}
   , facebook      : { type: String }
   , google        : { type: String }

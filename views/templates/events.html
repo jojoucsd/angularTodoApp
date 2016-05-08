@@ -1,0 +1,13 @@
+ 
+
+      <form ng-submit="createEvent(user)">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input class="form-control" type="text" ng-model="post.title">
+        </div>
+        <input class="form-control" type="text" ng-model="event.location" g-places-autocomplete options="autocompleteOptions">
+        <div class="form-group">
+          <textarea class="form-control" ng-model="post.body"></textarea>
+        </div>
+        <button type="submit">Save</button>
+      </form>
