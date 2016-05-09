@@ -2,7 +2,7 @@
 
 /* MAIN Controller */
 
-angular.module('basic-auth')
+angular.module('d2r-app')
   .controller('MainCtrl', ['$scope', '$rootScope', '$location', '$auth', '$http', 'Auth', '$route', function ($scope, $rootScope, $location, $auth, $http, Auth, $route) {
 
     // LOGIN/REGISTER

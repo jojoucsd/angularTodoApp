@@ -3,7 +3,7 @@
 
 /* Services */
 
-angular.module('basic-auth.services', [])
+angular.module('d2r-app.services', [])
 
   .factory('Auth', ['$auth', function ($auth) {
     return {

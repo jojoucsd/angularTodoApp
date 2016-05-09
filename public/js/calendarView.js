@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('basic-auth.calendar', [])
+angular.module('d2r-app.calendar', [])
   .directive('calendar', function (){
     return {
         restrict: "E",

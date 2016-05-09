@@ -2,7 +2,7 @@
 
 /* USER Controllers */
 
-angular.module('basic-auth')
+angular.module('d2r-app')
 .controller('UsersCtrl', ['$scope', '$http', '$auth', 'Auth', function($scope, $http, $auth, Auth) {
   
   var now = moment()

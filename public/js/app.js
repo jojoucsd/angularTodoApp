@@ -1,17 +1,18 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-angular.module('basic-auth', ['basic-auth.services',
+angular.module('d2r-app', ['d2r-app.services',
                               'ngRoute',
                               'ngResource',
                               'satellizer',
-                              'basic-auth.calendar',
+                              'd2r-app.calendar',
                               'ngMdIcons',
                               'google.places'])
 
     .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
       $routeProvider.when('/', {
-        templateUrl: 'templates/splash'
+        templateUrl: 'templates/splash',
+        controller: 'ApiCtrl'
       });
 
       $routeProvider.when('/dashboard', {

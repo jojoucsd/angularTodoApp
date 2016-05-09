@@ -28,5 +28,8 @@ node_modules
 # public/vendor
 
 *.DS_Store
-
 env/development.js
+env/production.js
+
+#.env
+token secret

@@ -8,26 +8,31 @@
 */
 
 .jumbotron {
-  padding:100px 0 130px 0;
+	padding:100px 0 130px 0;
 }
 
 .navbar-right {
-    margin-right: 0;
+	margin-right: 0;
 }
 
 .btn-toolbar {
-  display: inline-block;
-}​
+	display: inline-block;
+	}​
 
-a {
-    cursor: pointer;
-}
+	a {
+		cursor: pointer;
+	}
 
-.navbar {
-  margin:0;
-}
+	.navbar {
+		margin:0;
+	}
 
-.dropdown-form {
-  padding: 17px;
-  width: 300px;
-}
+	.dropdown-form {
+		padding: 17px;
+		width: 300px;
+	}
+
+	#splashimg {
+		max-width:100% !important;
+		height:auto;
+	}
