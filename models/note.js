@@ -18,6 +18,6 @@ NoteSchema.pre('save', function(next){
   next();
 });
 
-var Note = mongoose.mode('Note', NoteSchema);
+var Note = mongoose.model('Note', NoteSchema);
 
 module.exports = Note;

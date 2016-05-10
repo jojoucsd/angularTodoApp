@@ -7,7 +7,8 @@ angular.module('d2r-app', ['d2r-app.services',
                               'satellizer',
                               'd2r-app.calendar',
                               'ngMdIcons',
-                              'google.places'])
+                              'google.places',
+                              'ngMap'])
 
     .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
       $routeProvider.when('/', {
@@ -20,6 +21,16 @@ angular.module('d2r-app', ['d2r-app.services',
         controller: 'UsersCtrl'
       });
 
+      $routeProvider.when('/dashboard', {
+        templateUrl: 'templates/dashboard',
+        controller: 'ApiCtrl'
+      });
+
+      $routeProvider.when('/dashboard', {
+        templateUrl: 'templates/dashboard',
+        controller: 'EventsCtrl'
+      });
+
       $routeProvider.when('/posts', {
         templateUrl: 'templates/tasks',
         controller: 'UsersCtrl'
@@ -27,7 +38,7 @@ angular.module('d2r-app', ['d2r-app.services',
      
       $routeProvider.when('/events', {
         templateUrl: 'templates/events',
-        controller: 'UsersCtrl'
+        controller: 'EventsCtrl'
       })
 
       $routeProvider.when('/notes', {

@@ -6,7 +6,7 @@ var PostSchema = Schema({
   body   : String,
   created_at : { type: Date, default: Date.now() },
   updated_at : { type: Date },
-  user : [{type: Schema.Types.ObjectId, ref: 'User'}]
+  user : [{type: Schema.Types.ObjectId, ref: 'User'}],
 });
 
 // MIDDLEWARE

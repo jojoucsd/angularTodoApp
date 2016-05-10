@@ -1,1 +1,62 @@
-<h2>hellow</h2>
+<div class="container">
+  <div class="row">
+  <div class="col-sm-5"><br/>
+   <calendar selected="day"></calendar>
+   <h5>Selected Date : {{ now }}</h5>
+   <h5 ng-model="day">Selected Date : {{day}}</h5>
+   <form class='post-search'>
+    <div class="input-append">
+      <input type="text" ng-model="search" value = "day" class="search-query">
+      <input type="text" ng-model="day">
+      <a class="clear" ng-click="day = ''">
+        <span class="glyphicon glyphicon-remove"></span>
+      </a>
+      <button type="submit" class="btn">Search</button>
+    </div>
+   </form>
+  </div>
+    <div class="col-sm-7">
+      <div class="page-header">
+        <h4>Tasks</h4>
+      </div>
+      <form ng-submit="createPost(user)">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input class="form-control" type="text" ng-model="post.title">
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" ng-model="post.body"></textarea>
+        </div>
+        <div></div>
+        <button type="submit">Save</button>
+      </form>
+      <hr>
+      <ul class='list-group'>
+        <div class='row'>
+          <div ng-animate="'animate'" class='col-sm-4 col-md-3 col-lg-2' ng-repeat="post in user.posts | filter: search">
+          <div ng-hide="post.editForm">
+          <h3>{{post.title}}</h3>
+          <p>{{post.body}}</p>
+          <p>Created Date: {{post.created_at | date:'yyyy-MM-dd'}}</p>
+          <a href="#" class="pull-right">
+            <ng-md-icon icon="edit" style="fill: black" size="20" ng-click="post.editForm = true"></ng-md-icon>
+          </a>
+          <a href="#" class='pull-right' ng-click="deletePost(post)">
+            <i class='icon ion-close-circled'></i>
+          </a>
+          </div>
+          <form  ng-show="post.editForm" ng-submit="updatePost(post)">
+            <div class="form-group">
+              <input type="text" ng-model="post.title" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="text" ng-model="post.body" class="form-control">
+            </div>
+            <input type="submit" value="Save Post" class="btn btn-default">
+          </form>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>

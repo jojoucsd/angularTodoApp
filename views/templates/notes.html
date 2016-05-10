@@ -1,0 +1,55 @@
+<div class="container" ng-controller="UsersCtrl">
+  <div class="row">
+    <div class="col-sm-5"><br/>
+     <calendar selected="day"></calendar>
+     <h5>Selected Date : {{ now }}</h5>
+     <h5 ng-model="day">Selected Date : {{day}}</h5>
+     <form class='post-search'>
+      <div class="input-append">
+        <input type="text" ng-model="search" value = "day" class="search-query">
+        <input type="text" ng-model="day">
+        <a class="clear" ng-click="day = ''">
+          <span class="glyphicon glyphicon-remove"></span>
+        </a>
+        <button type="submit" class="btn">Search</button>
+      </div>
+     </form>
+    </div>
+  <div class="col-sm-7">
+    <div class="page-header">
+      <h4>Notes</h4>
+    </div>
+    <form ng-submit="createNote(user)">
+      <div class="form-group">
+        <label for="title">Notes</label>
+        <textarea class="form-control" ng-model="note.body"></textarea>
+      </div>
+      <div></div>
+      <button type="submit">Save</button>
+    </form>
+    <hr>
+    <ul class='list-group'>
+      <div class='row'>
+        <div ng-animate="'animate'" class='col-sm-4 col-md-3 col-lg-2' ng-repeat="note in user.notes | filter: search">
+          <div ng-hide="note.editForm">
+            <p>{{note.body}}</p>
+            <p>Created Date: {{note.created_at | date:'yyyy-MM-dd'}}</p>
+            <a href="#" class="pull-right">
+              <ng-md-icon icon="edit" style="fill: black" size="20" ng-click="note.editForm = true"></ng-md-icon>
+            </a>
+            <a href="#" class='pull-right' ng-click="deleteNote(note)">
+              <i class='icon ion-close-circled'></i>
+            </a>
+          </div>
+          <form  ng-show="note.editForm" ng-submit="updateNote(note)">
+            <div class="form-group">
+              <input type="text" ng-model="note.body" class="form-control">
+            </div>
+            <input type="submit" value="Save Note" class="btn btn-default">
+          </form>
+        </div>
+      </div>
+    </ul>
+  </div>
+</div>
+</div>

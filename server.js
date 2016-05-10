@@ -41,7 +41,7 @@ app.get('/templates/:name', resources.templates);
 require('./resources/users')(app);
 require('./resources/posts')(app);
 require('./resources/apis')(app);
-
+require('./resources/events')(app);
 // redirect all others to the index (HTML5 history)
 app.get('*', resources.index);
 

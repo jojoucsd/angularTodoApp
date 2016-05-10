@@ -4,10 +4,14 @@
 
 angular.module('d2r-app')
 .controller('UsersCtrl', ['$scope', '$http', '$auth', 'Auth', function($scope, $http, $auth, Auth) {
-  
+  $http.get('/api/me').success(function(data){
+  $scope.user = data; 
+  })
+  //Calendar 
   var now = moment()
   $scope.day = now.format('YYYY-MM-DD');
-  $scope.day = '';
+  $scope.post = {};
+  $scope.note = {};
   // console.log($scope.day);
   // console.log('UserCtrl', $scope.day)
   // var date = moment().format('YYYY-MM-DD');
@@ -25,13 +29,8 @@ angular.module('d2r-app')
   //   // pickedDate.push(moment(day).format("YYYY-MM-DD"));
   //   // console.log(pickedDate);
   // }
-
-
-  $http.get('/api/me').success(function(data) {
-    $scope.user = data;
-      // console.log('$scope', $scope.user)
-    });
-
+  
+//Post Section
   $scope.createPost = function(user) {
       // console.log(user);
       var config = {
@@ -53,17 +52,6 @@ angular.module('d2r-app')
     // $scope.post = {};
   }
 
-  // $scope.editPost = function(post){
-  //   // console.log('post', post)
-  //   $scope.post = {
-  //     user: post.user[0],
-  //     _id: post._id,
-  //     title: post.title,
-  //     body: post.body
-  //   }
-  //   console.log('edit', $scope.post);
-  // }
-
   $scope.updatePost = function(post){
     console.log('update', post)
     $http.put('/api/posts/'+ post._id, post)
@@ -71,7 +59,6 @@ angular.module('d2r-app')
       console.log(response)
       post.editForm = false;
     })
-    // console.log('edit', post);
   };
 
   $scope.deletePost = function(post) {
@@ -81,6 +68,37 @@ angular.module('d2r-app')
         // console.log(response)
         var index= $scope.user.posts.indexOf(post)
         $scope.user.posts.splice(index, 1);
+      })
+    .error(function(response){
+      console.log(response)
+    });
+  };
+  // Note Section
+  $scope.createNote = function(user) {
+      // console.log(user);
+      var config = {
+        body: $scope.note.body
+      };
+      $http.post('/api/notes', config)
+      .success(function(response) {
+        console.log('response', response)
+        $scope.user.notes.unshift(response);
+      })
+      .error(function(response) {
+       console.log('err', response)
+     })
+    }
+  $scope.updateNote = function(note){
+    $http.put('/api/notes/'+ note._id, note)
+    .success(function(response){
+      note.editForm = false;
+    })
+  };
+  $scope.deleteNote = function(note) {
+    $http.delete('/api/notes/' + note._id)
+    .success(function(response){
+        var index= $scope.user.notes.indexOf(note)
+        $scope.user.notes.splice(index, 1);
       })
     .error(function(response){
       console.log(response)
