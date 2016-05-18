@@ -1,7 +1,8 @@
 <div class="container">
-  <div class="col-sm-3" ng-controller="UsersCtrl"><br/>
+  <div ng-controller="UsersCtrl">
+  <div class="col-sm-3"><br/>
     <h4>{{user.displayName}}</h4>
-    <img src="{{user.picture}}">
+    <!-- <img src="{{user.picture}}"> -->
     <!-- <calendar selected="day"></calendar> -->
     <br>
     <form class='post-search'>
@@ -37,7 +38,7 @@
       </div>
     </ul>
   </div>
-  <div class="col-sm-6" ng-controller="UsersCtrl">
+  <div class="col-sm-6">
     <div class="tabForm">
       <div id="tabs" ng-controller="ApiCtrl">
         <ul>
@@ -129,6 +130,7 @@
       </div>
     </ul>
   </div>
+  </div>
   <div class="col-sm-3">
     <ng-map center="current-location" zoom="11" styles="[{stylers:[{hue:'#e0efef '},{visibility:'on'},{saturation: '0'},{gamma: '0.5'}]},{elementType:'labels',stylers:[{visibility:'on'}]},{featureType:'water',stylers:[{color:'#dedede '}]}]">
     <transit-layer></transit-layer>
@@ -169,3 +171,5 @@
       </ul>
     </div>
   </div>
+
+

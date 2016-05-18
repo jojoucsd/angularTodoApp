@@ -1,9 +1,7 @@
 <div class="container">
   <div class="row">
   <div class="col-sm-5"><br/>
-   <calendar selected="day"></calendar>
-   <h5>Selected Date : {{ now }}</h5>
-   <h5 ng-model="day">Selected Date : {{day}}</h5>
+   <calendar selected="day" ng-click= "postFilter(day, user); filterResult = true"></calendar>
    <form class='post-search'>
     <div class="input-append">
       <input type="text" ng-model="search" value = "day" class="search-query">
@@ -32,8 +30,8 @@
       </form>
       <hr>
       <ul class='list-group'>
-        <div class='row'>
-          <div ng-animate="'animate'" class='col-sm-4 col-md-3 col-lg-2' ng-repeat="post in user.posts | filter: search">
+        <div class='row' ng-hide="filterResult">
+          <div class='col-sm-4 col-md-3 col-lg-2' ng-repeat="post in user.posts | filter: search">
           <div ng-hide="post.editForm">
           <h3>{{post.title}}</h3>
           <p>{{post.body}}</p>
@@ -55,6 +53,11 @@
             <input type="submit" value="Save Post" class="btn btn-default">
           </form>
           </div>
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-2" ng-show="filterResult" ng-repeat="filter in filters">
+          <h3>{{filter.title}}</h3>
+          <p>{{filter.body}}</p>
+          <p>Created Date: {{filter.created_at}}</p>
         </div>
       </ul>
     </div>

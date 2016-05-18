@@ -8,6 +8,24 @@ angular.module('d2r-app')
 
 	$scope.event = {};
 
+	//Event Filter
+	$scope.eventFilter = function(day, user){
+	  var filterDate = moment(day);
+	  var filterRange = moment(filterDate).add(1,'day');
+	  var created_at = { 
+	    user: user._id,
+	    startDate: filterDate,
+	    finishDate: filterRange
+	  };
+	  $http.post('/api/events/filter', created_at )
+	  .success(function(response) {
+	    console.log('filter result:', response)
+	    $scope.filters = response ;
+	  })
+	  $scope.filter = {};
+	}
+
+	//Create, Edit and Delete
 	$scope.createEvent = function(user) {
 		var config = {
 			title : $scope.event.title,

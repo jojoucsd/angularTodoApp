@@ -21,6 +21,25 @@ module.exports = function(app) {
 		});
 	});
 
+	// filter events
+	app.post('/api/events/filter', auth.ensureAuthenticated, function (req,res){
+		console.log('backend', req.body)
+		User.findById(req.body.user).exec(function (err, user){
+			console.log('user', user)
+				Event.find({ created_at: {$gte: req.body.startDate,
+										 $lte: req.body.finishDate},
+							user: req.body.user
+			}, function(err, event){
+				if (err){
+					console.log(err)
+					return res.send(err);
+				}
+				console.log('filter result', event)
+				res.send(event);
+			})
+		})
+	})
+
 	app.post('/api/events', auth.ensureAuthenticated, function (req,res) {
 		User.findById(req.userId).exec(function(err, user) {
 			if (err)

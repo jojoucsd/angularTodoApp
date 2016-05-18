@@ -16,6 +16,11 @@ angular.module('d2r-app', ['d2r-app.services',
         controller: 'ApiCtrl'
       });
 
+      $routeProvider.when('/profile', {
+        templateUrl: 'templates/profile',
+        controller: 'UsersCtrl'
+      })
+
       $routeProvider.when('/dashboard', {
         templateUrl: 'templates/dashboard',
         controller: 'UsersCtrl'

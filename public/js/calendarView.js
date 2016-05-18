@@ -22,13 +22,9 @@ angular.module('d2r-app.calendar', [])
             scope.select = function(day) {
                 scope.selected = day.date.format("YYYY-MM-DD");
                 // scope.selected = day.date
-                scope.addDate =function (){
-                    var date = "Date Customer picked by Directive";
-                    scope.add({ date: date})
+                // console.log('selected', day.date._d) 
                 }
-                console.log('selected', day.date._d) 
-            };
-
+          
             scope.next = function() {
                 var next = scope.month.clone();
                 _removeTime(next.month(next.month()+1).date(1).day(0));

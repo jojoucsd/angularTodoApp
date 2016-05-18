@@ -7,29 +7,51 @@ angular.module('d2r-app')
   $http.get('/api/me').success(function(data){
   $scope.user = data; 
   })
+
+  $scope.post = {};
+  $scope.note = {};
+
   //Calendar 
   var now = moment()
   $scope.day = now.format('YYYY-MM-DD');
-  $scope.post = {};
-  $scope.note = {};
-  // console.log($scope.day);
-  // console.log('UserCtrl', $scope.day)
-  // var date = moment().format('YYYY-MM-DD');
-  // console.log("new day", date);
-  // $scope.day = date;
-  // console.log('$scope.day', $scope.day._d)
-  // $scope.select = function(pDate){
-  //   // console.log('moment', day._d)
-  //   var selectedDate = pDate;
-  //   console.log(selectedDate);
-  //   var pickedDate = moment(selectedDate).format("YYYY-MM-DD");
-  //   // console.log(pickedDate);
-  //   // return pickedDate;
-  //   // var pickedDate = [];
-  //   // pickedDate.push(moment(day).format("YYYY-MM-DD"));
-  //   // console.log(pickedDate);
-  // }
+
+  //Post Filter
+  $scope.postFilter = function(day, user){
+    var filterDate = moment(day);
+    var filterRange = moment(filterDate).add(1,'day');
+    var created_at = { 
+      user: user._id,
+      startDate: filterDate,
+      finishDate: filterRange
+    };
+    $http.post('/api/posts/filter', created_at )
+    .success(function(response) {
+      console.log('filter result:', response)
+      $scope.filters = response ;
+      user.filterResult = false;
+    })
+    $scope.filter = {};
+  }
   
+  //Note Filter
+  $scope.noteFilter = function(day, user){
+    var filterDate = moment(day);
+    var filterRange = moment(filterDate).add(1,'day');
+    var created_at = { 
+      user: user._id,
+      startDate: filterDate,
+      finishDate: filterRange
+    };
+    console.log(created_at);
+    $http.post('/api/notes/filter', created_at )
+    .success(function(response) {
+      console.log('filter result:', response)
+      $scope.filters = response ;
+      filterResult = false;
+    });
+    $scope.filter = {};
+  }
+
 //Post Section
   $scope.createPost = function(user) {
       // console.log(user);
@@ -77,7 +99,8 @@ angular.module('d2r-app')
   $scope.createNote = function(user) {
       // console.log(user);
       var config = {
-        body: $scope.note.body
+        body: $scope.note.body,
+        user: user._id
       };
       $http.post('/api/notes', config)
       .success(function(response) {

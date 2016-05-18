@@ -1,9 +1,7 @@
 <div class="container" ng-controller="UsersCtrl">
   <div class="row">
     <div class="col-sm-5"><br/>
-     <calendar selected="day"></calendar>
-     <h5>Selected Date : {{ now }}</h5>
-     <h5 ng-model="day">Selected Date : {{day}}</h5>
+     <calendar selected="day" ng-click="noteFilter(day, user) ; user.filterResult = true"></calendar>
      <form class='post-search'>
       <div class="input-append">
         <input type="text" ng-model="search" value = "day" class="search-query">
@@ -13,8 +11,8 @@
         </a>
         <button type="submit" class="btn">Search</button>
       </div>
-     </form>
-    </div>
+    </form>
+  </div>
   <div class="col-sm-7">
     <div class="page-header">
       <h4>Notes</h4>
@@ -30,7 +28,7 @@
     <hr>
     <ul class='list-group'>
       <div class='row'>
-        <div ng-animate="'animate'" class='col-sm-4 col-md-3 col-lg-2' ng-repeat="note in user.notes | filter: search">
+        <div ng-hide="user.filterResult" class='col-sm-4 col-md-3 col-lg-2' ng-repeat="note in user.notes | filter: search">
           <div ng-hide="note.editForm">
             <p>{{note.body}}</p>
             <p>Created Date: {{note.created_at | date:'yyyy-MM-dd'}}</p>
@@ -47,6 +45,10 @@
             </div>
             <input type="submit" value="Save Note" class="btn btn-default">
           </form>
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-2" ng-repeat="filter in filters" ng-show="user.filterResult">
+          <p>{{filter.body}}</p>
+          <p>Created Date: {{filter.created_at | date:'yyyy-MM-dd'}}</p>
         </div>
       </div>
     </ul>
