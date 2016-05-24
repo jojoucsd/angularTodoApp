@@ -30,6 +30,7 @@ angular.module('d2r-app')
           $auth.setToken(response);
           $scope.isAuthenticated();
           $scope.user = {};
+          $('#login-modal').modal('hide');
           $location.path('/profile');
         })
         .catch(function(response) {
@@ -43,6 +44,7 @@ angular.module('d2r-app')
           $auth.setToken(response.data.token);
           $scope.isAuthenticated();
           $scope.user = {};
+          $('#login-modal').modal('hide');
           $location.path('/profile')
         })
         .catch(function(response) {

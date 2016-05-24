@@ -19,7 +19,7 @@ angular.module('d2r-app')
 	  };
 	  $http.post('/api/events/filter', created_at )
 	  .success(function(response) {
-	    console.log('filter result:', response)
+	    // console.log('filter result:', response)
 	    $scope.filters = response ;
 	  })
 	  $scope.filter = {};

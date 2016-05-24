@@ -3,14 +3,14 @@
 /* USER Controllers */
 
 angular.module('d2r-app')
-.controller('UsersCtrl', ['$scope', '$http', '$auth', 'Auth', function($scope, $http, $auth, Auth) {
+.controller('UsersCtrl', ['$scope', '$http', '$auth', 'Auth', '$location', '$window', 'srvShareData', function($scope, $http, $auth, Auth, $location, $window, srvShareData) {
   $http.get('/api/me').success(function(data){
   $scope.user = data; 
   })
 
   $scope.post = {};
   $scope.note = {};
-
+  $scope.postshow = {};
   //Calendar 
   var now = moment()
   $scope.day = now.format('YYYY-MM-DD');
@@ -95,6 +95,25 @@ angular.module('d2r-app')
       console.log(response)
     });
   };
+
+  $scope.dataToShare = [];
+  $scope.postShow = function(post) {
+    $http.get('/api/posts/'+ post._id).success(function(response){
+      // console.log('return', response)  
+      
+      $scope.dataToShare = response;
+     srvShareData.addData($scope.dataToShare);
+      $window.location.href = '/tasks/'+post._id + '/comments';
+    })
+  }
+
+  
+  // $scope.shareMyData = function (myValue) {
+
+  //   $scope.dataToShare = myValue;
+  //   srvShareData.addData($scope.dataToShare);
+  //   $window.location.href = '/task-show';
+  // }
   // Note Section
   $scope.createNote = function(user) {
       // console.log(user);
@@ -127,4 +146,9 @@ angular.module('d2r-app')
       console.log(response)
     });
   };
+}])
+
+.controller('CommentsCtrl', ['Post', 'Auth', '$scope', '$http', '$location', '$routeParams', 'srvShareData', function (Post, Auth, $scope, $http, $location, $routeParams, srvShareData){
+  console.log('CommentsCtrl is in play');
+  $scope.sharedData = srvShareData.getData();
 }]);

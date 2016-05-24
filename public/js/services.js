@@ -36,4 +36,32 @@ angular.module('d2r-app.services', [])
   return $resource($window.location.origin + '/api/notes/:id', { id: '@id' }, {
     update: { method: 'PUT'} 
   });
+})
+
+.service('srvShareData', function($window) {
+  var KEY = 'App.SelectedValue';
+
+  var addData = function(newObj) {
+    var mydata = $window.sessionStorage.getItem(KEY);
+    if (mydata) {
+      mydata = JSON.parse(mydata);
+    } else {
+      mydata = [];
+    }
+    mydata.unshift(newObj);
+    $window.sessionStorage.setItem(KEY, JSON.stringify(mydata));
+  };
+
+  var getData = function(){
+    var mydata = $window.sessionStorage.getItem(KEY);
+    if (mydata) {
+      mydata = JSON.parse(mydata);
+    }
+    return mydata || [];
+  };
+
+  return {
+    addData: addData,
+    getData: getData
+  };
 });

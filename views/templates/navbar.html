@@ -1,20 +1,23 @@
-<nav class="main-nav navbar navbar-fixed-top navbar-transparent">
+<nav class="main-nav navbar-fixed-top navbar-transparent" ng-show="currentUser">
   <div class="navbar-header">
-    <button type="button" data-toggle="collapse" data-target="#site-nav" class="navbar-toggle"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><!-- ======= LOGO ========--><a href="#home" class="navbar-brand scrollto"><img src="/img/logo.png" alt="logo" class="site-logo transparent-logo">&#x9;&#x9;&#x9;&#x9;&#x9;<img src="/img/logo.png" alt="logo" class="site-logo"></a>
-  </div>&#x9;&#x9;&#x9;
+    <button type="button" data-toggle="collapse" data-target="#site-nav" class="navbar-toggle"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+        <!-- ======= LOGO ========--><a href="/" class="navbar-brand scrollto"><img src="/img/logo.png" alt="logo" class="site-logo transparent-logo">&#x9;&#x9;&#x9;&#x9;&#x9;<img src="/img/logo.png" alt="logo" class="site-logo"></a>&#x9;&#x9;&#x9;
       &#x9;&#x9;&#x9;
-  <div id="site-nav" class="navbar-collapse collapse">
+  </div>
+  <div id="site-nav" class="navbar-collapse collapse" ng-controller="ApiCtrl">
     <ul class="nav navbar-nav navbar-right">
-<!--     <div ng-show="currentUser" class='week'>
-    <div ng-show="currentUser" class='day'></div>
-    <div ng-show="currentUser" class='month'></div>
-    <div ng-show="currentUser" class='year'></div> -->
+      <li><h6 style="color:white">{{weather.name}}</h6></li><br>
+      <li><h6 style="color:white">{{weather.main.temp}} F°</h6></li>&#x9;&#x9;&#x9;
+      <li><h6 style="color:white">{{weather.weather[0].description}}</h6></li> 
+    </ul>
+  </div>
+</nav>
 
-      <li ng-show="!currentUser" class="dropdown">
-        <a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-          Login
-        </a>
-        <div class="dropdown-menu dropdown-form">
+  <div id="login-modal" tabindex="-1" role="dialog" class="modal fade">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div ng-show="err" class="alert alert-danger">{{err}}</div>
           <form>
             <div class="form-group">
               <label for="">Email</label>
@@ -24,95 +27,49 @@
               <label for="">Password</label>
               <input type="password" ng-model="user.password" class="form-control"/>
             </div>
-            <button type="submit" ng-click="login()" class="btn btn-info">Log In</button>
-          </form>
-        </div>
-      </li>
-      <li ng-show="!currentUser" class="dropdown">
-        <a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-          Sign Up
-        </a>
-        <div class="dropdown-menu dropdown-form" style="padding:17px;">
-          <form>
-            <div class="form-group">
-              <label for="">Email</label>
-              <input type="text" ng-model="user.email" class="form-control"/>
-            </div>
-            <div class="form-group">
-              <label for="">Password</label>
-              <input type="password" ng-model="user.password" class="form-control"/>
-            </div>
-            <div class="form-group">
+            <div ng-show="signupMode" class="form-group">
               <label for="">Confirm Password</label>
               <input type="password" ng-model="user.confirm" class="form-control"/>
             </div>
-            <button type="submit" ng-click="signup()" class="btn btn-info">Sign Up</button>
           </form>
         </div>
-      </li>
-      <li ng-show="currentUser" class="dropdown" ng-controller="UsersCtrl">
-        <a data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><span class="status"><img src="{{user.picture}}" id="avatar"></span><span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="/dashboard">DashBoard</a></li>
-          <li><a href="/posts">Tasks</a></li>
-          <li><a href="/notes">Notes</a></li>
-          <li><a href="/events">Events</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a ng-click="logout()">Logout</a></li>
-        </ul>
-      </li>
-    </ul>
-    <!-- <div class="nav navbar-nav navbar-right"><a data-toggle="modal" data-target="#login-modal" ng-hide="currentUser" class="navbar-btn btn btn-info">Get Started</a></div> -->
-  </div>
-</nav>
-<div id="login-modal" tabindex="-1" role="dialog" class="modal fade">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div ng-show="err" class="alert alert-danger">{{err}}</div>
-        <form>
-          <div class="form-group">
-            <label for="">Email</label>
-            <input type="text" ng-model="user.email" class="form-control"/>
-          </div>
-          <div class="form-group">
-            <label for="">Password</label>
-            <input type="password" ng-model="user.password" class="form-control"/>
-          </div>
-          <div ng-show="signupMode" class="form-group">
-            <label for="">Confirm Password</label>
-            <input type="password" ng-model="user.confirm" class="form-control"/>
-          </div>
-        </form>
+        <div class="modal-footer"><a ng-click="signupMode = true" ng-hide="signupMode" class="btn btn-link">Sign Up</a>
+          <button type="submit" ng-hide="signupMode" ng-click="login()" class="btn btn-info">Log In</button><a ng-click="signupMode = false" ng-show="signupMode" class="btn btn-link">Login</a>
+          <button type="submit" ng-cloak="" ng-show="signupMode" ng-click="signup()" class="btn btn-info">Sign Up</button>
+        </div>
+        <button ng-click="authenticate('facebook')">Sign in with Facebook</button>
+        <button ng-click="authenticate('google')">Sign in with Google</button>
       </div>
-      <div class="modal-footer"><a ng-click="signupMode = true" ng-hide="signupMode" class="btn btn-link">Sign Up</a>
-        <button type="submit" ng-hide="signupMode" ng-click="login()" class="btn btn-info">Log In</button><a ng-click="signupMode = false" ng-show="signupMode" class="btn btn-link">Login</a>
-        <button type="submit" ng-cloak="" ng-show="signupMode" ng-click="signup()" class="btn btn-info">Sign Up</button>
-      </div>
-      <button ng-click="authenticate('facebook')">Sign in with Facebook</button>
-      <button ng-click="authenticate('google')">Sign in with Google</button>
     </div>
   </div>
-</div>
-<nav class="menu-nav">
- <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open"/>
- <label class="menu-open-button" for="menu-open">
-   <span class="hamburger hamburger-1"></span>
-   <span class="hamburger hamburger-2"></span>
-   <span class="hamburger hamburger-3"></span>
- </label>
- <a href="#" class="menu-item">
-   <span class="glyphicon glyphicon-home"></i>
- </a>
- <a href="#" class="menu-item">
-   <span class="glyphicon glyphicon-envelope"></i>
- </a>
- <a class="menu-item">
- <label for="chat-toggle" class="toggle"><span class="glyphicon glyphicon-comment"></i></label>
- </a>
- <a href="/profile" class="menu-item">
-   <span class="glyphicon glyphicon-user"></i>
- </a>
-</nav>
+  <div ng-show="currentUser">
+    <nav class="menu-nav" ng-controller="UsersCtrl">
+     <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open"/>
+     <label class="menu-open-button" for="menu-open">
+       <span class="hamburger hamburger-1"></span>
+       <span class="hamburger hamburger-2"></span>
+       <span class="hamburger hamburger-3"></span>
+     </label>
+      <a href="#" ng-click="logout()" class="menu-item">
+       <ng-md-icon icon="exit_to_app" style="fill:white"></ng-md-icon>
+      </a>
+      <a href="/events" class="menu-item">
+       <ng-md-icon icon="event_note" style="fill:white"></ng-md-icon>
+      </a>
+      <a href="/tasks" class="menu-item">
+       <ng-md-icon icon="rate_review" style="fill:white"></ng-md-icon>
+      </a>
+      <a href="/notes" class="menu-item">
+       <ng-md-icon icon="note_add" style="fill:white"></ng-md-icon>
+      </a>      
+      <a href="/dashboard" class="menu-item">
+       <ng-md-icon icon="dashboard" style="fill:white"></ng-md-icon>
+      </a>
+      <a href="/profile" class="menu-item">
+       <!-- <img src="{{user.picture}}"> -->
+       <ng-md-icon icon="account_box" style="fill:white"></ng-md-icon>
+      </a>
+    </nav>
+  </div>
 
 

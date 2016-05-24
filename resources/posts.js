@@ -22,9 +22,9 @@ module.exports = function(app) {
 		console.log('backend', req.body)
 		User.findById(req.body.user).exec(function (err, user){
 			console.log('user', user)
-				Post.find({ created_at: {$gte: req.body.startDate,
-										 $lte: req.body.finishDate},
-							user: req.body.user
+			Post.find({ created_at: {$gte: req.body.startDate,
+				$lte: req.body.finishDate},
+				user: req.body.user
 			}, function(err, post){
 				if (err){
 					console.log(err)
@@ -36,13 +36,12 @@ module.exports = function(app) {
 		})
 	})
 
-	app.get('api/posts/:post_id', auth.ensureAuthenticated, function (req,res) {
-		User.findById(req.userId).exec(function (err, user) {
-			Post.findById(req.params.post_id, function(err, post) {
-				if (err) { return res.status(404).send(err); }
-				res.send(post); 
-			});
-		})
+	app.get('/api/posts/:post_id', auth.ensureAuthenticated, function (req,res) { 
+		Post.findById(req.params.post_id, function(err, post) {
+			console.log('backend', post)
+			if (err) { return res.status(404).send(err); }
+			res.send(post);
+		});
 	})
 	
 	app.put('/api/posts/:post_id', auth.ensureAuthenticated, function(req,res){ 
@@ -81,9 +80,9 @@ module.exports = function(app) {
 	  	console.log('backend', req.body)
 	  	User.findById(req.body.user).exec(function (err, user){
 	  		console.log('user', user)
-	  			Note.find({ created_at: {$gte: req.body.startDate,
-	  									 $lte: req.body.finishDate},
-	  						user: req.body.user
+	  		Note.find({ created_at: {$gte: req.body.startDate,
+	  			$lte: req.body.finishDate},
+	  			user: req.body.user
 	  		}, function(err, note){
 	  			if (err){
 	  				console.log(err)

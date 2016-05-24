@@ -36,7 +36,7 @@ angular.module('d2r-app', ['d2r-app.services',
         controller: 'EventsCtrl'
       });
 
-      $routeProvider.when('/posts', {
+      $routeProvider.when('/tasks', {
         templateUrl: 'templates/tasks',
         controller: 'UsersCtrl'
       });
@@ -51,10 +51,10 @@ angular.module('d2r-app', ['d2r-app.services',
         controller: 'UsersCtrl'
       })
       
-      // $routeProvider.when('/navbar', {
-      //   templateUrl: 'templates/navbar',
-      //   controller: 'UsersCtrl'
-      // });
+      $routeProvider.when('/tasks/:id/comments', {
+        templateUrl: 'templates/task-show',
+        controller: 'CommentsCtrl'
+      })
 
       $routeProvider.otherwise({redirectTo: '/'});
 

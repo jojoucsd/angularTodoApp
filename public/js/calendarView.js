@@ -12,6 +12,7 @@ angular.module('d2r-app.calendar', [])
         link: function(scope) {
             scope.selected = _removeTime(scope.selected || moment());
             scope.month = scope.selected.clone();
+            // console.log('directive', scope.selected)
 
             var start = scope.selected.clone().startOf('day'); 
             start.date(1);
