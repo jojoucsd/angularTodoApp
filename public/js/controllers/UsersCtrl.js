@@ -3,14 +3,14 @@
 /* USER Controllers */
 
 angular.module('d2r-app')
-.controller('UsersCtrl', ['$scope', '$http', '$auth', 'Auth', '$location', '$window', 'srvShareData', function($scope, $http, $auth, Auth, $location, $window, srvShareData) {
+.controller('UsersCtrl', ['$scope', '$http', '$auth', 'Auth', '$location', '$window', 'srvShareData', '$routeParams', function($scope, $http, $auth, Auth, $location, $window, srvShareData, $routeParams) {
   $http.get('/api/me').success(function(data){
-  $scope.user = data; 
+    $scope.user = data; 
   })
 
   $scope.post = {};
   $scope.note = {};
-  $scope.postshow = {};
+
   //Calendar 
   var now = moment()
   $scope.day = now.format('YYYY-MM-DD');
@@ -53,16 +53,13 @@ angular.module('d2r-app')
   }
 
 //Post Section
-  $scope.createPost = function(user) {
+$scope.createPost = function(user) {
       // console.log(user);
       var config = {
         user: user._id,
         title: $scope.post.title,
         body: $scope.post.body
       };
-      // console.log(config)
-      // console.log('user', user._id)
-      // console.log('scope.post', $scope.post)
       $http.post('/api/posts', config)
       .success(function(response) {
         console.log('response', response)
@@ -96,24 +93,23 @@ angular.module('d2r-app')
     });
   };
 
-  $scope.dataToShare = [];
+  // $scope.dataToShare = [];
+  // $scope.postShow = function(post) {
+  //   $http.get('/api/posts/'+ post._id).success(function(response){
+  //     // console.log('return', response)  
+
+  //     $scope.dataToShare = response;
+  //    srvShareData.addData($scope.dataToShare);
+  //     $window.location.href = '/tasks/'+post._id + '/comments';
+  //   })
+  // }
+
   $scope.postShow = function(post) {
-    $http.get('/api/posts/'+ post._id).success(function(response){
-      // console.log('return', response)  
-      
-      $scope.dataToShare = response;
-     srvShareData.addData($scope.dataToShare);
-      $window.location.href = '/tasks/'+post._id + '/comments';
-    })
+    // console.log(post._id)
+    $location.path('/tasks/'+ post._id + '/comments');
+    // console.log('First', post)
   }
 
-  
-  // $scope.shareMyData = function (myValue) {
-
-  //   $scope.dataToShare = myValue;
-  //   srvShareData.addData($scope.dataToShare);
-  //   $window.location.href = '/task-show';
-  // }
   // Note Section
   $scope.createNote = function(user) {
       // console.log(user);
@@ -130,25 +126,34 @@ angular.module('d2r-app')
        console.log('err', response)
      })
     }
-  $scope.updateNote = function(note){
-    $http.put('/api/notes/'+ note._id, note)
-    .success(function(response){
-      note.editForm = false;
-    })
-  };
-  $scope.deleteNote = function(note) {
-    $http.delete('/api/notes/' + note._id)
-    .success(function(response){
+    $scope.updateNote = function(note){
+      $http.put('/api/notes/'+ note._id, note)
+      .success(function(response){
+        note.editForm = false;
+      })
+    };
+    $scope.deleteNote = function(note) {
+      $http.delete('/api/notes/' + note._id)
+      .success(function(response){
         var index= $scope.user.notes.indexOf(note)
         $scope.user.notes.splice(index, 1);
       })
-    .error(function(response){
-      console.log(response)
-    });
-  };
-}])
+      .error(function(response){
+        console.log(response)
+      });
+    };
+  }])
 
 .controller('CommentsCtrl', ['Post', 'Auth', '$scope', '$http', '$location', '$routeParams', 'srvShareData', function (Post, Auth, $scope, $http, $location, $routeParams, srvShareData){
   console.log('CommentsCtrl is in play');
-  $scope.sharedData = srvShareData.getData();
+  // $scope.sharedData = srvShareData.getData();
+  Post.get({ id: $routeParams.id}, function(post){
+    console.log('outside', $scope.post);
+    $scope.post = post;
+  })
 }]);
+
+
+
+
+
