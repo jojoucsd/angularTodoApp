@@ -28,7 +28,7 @@ angular.module('d2r-app')
     .success(function(response) {
       console.log('filter result:', response)
       $scope.filters = response ;
-      user.filterResult = false;
+      var filterResult = false;
     })
     $scope.filter = {};
   }
@@ -42,12 +42,12 @@ angular.module('d2r-app')
       startDate: filterDate,
       finishDate: filterRange
     };
-    console.log(created_at);
+    // console.log(created_at);
     $http.post('/api/notes/filter', created_at )
     .success(function(response) {
       console.log('filter result:', response)
       $scope.filters = response ;
-      filterResult = false;
+      var filterResult = false;
     });
     $scope.filter = {};
   }
@@ -110,6 +110,9 @@ $scope.createPost = function(user) {
     // console.log('First', post)
   }
 
+  $scope.noteShow = function(note){
+    $location.path('/tasks/'+ note._id + '/comments');
+  }
   // Note Section
   $scope.createNote = function(user) {
       // console.log(user);
@@ -144,13 +147,32 @@ $scope.createPost = function(user) {
     };
   }])
 
-.controller('CommentsCtrl', ['Post', 'Auth', '$scope', '$http', '$location', '$routeParams', 'srvShareData', function (Post, Auth, $scope, $http, $location, $routeParams, srvShareData){
+.controller('CommentsCtrl', ['Post','Note', 'Event', 'Auth', '$scope', '$http', '$location', '$routeParams', 'srvShareData', function (Post, Note, Event, Auth, $scope, $http, $location, $routeParams, srvShareData){
   console.log('CommentsCtrl is in play');
   // $scope.sharedData = srvShareData.getData();
   Post.get({ id: $routeParams.id}, function(post){
-    console.log('outside', $scope.post);
+    console.log('post', post);
     $scope.post = post;
   })
+
+  Note.get({ id: $routeParams.id}, function(note){
+    console.log('note', note)
+    $scope.note = note;
+  })
+
+  Event.get({ id: $routeParams.id}, function(event){
+    console.log('event', event)
+    $scope.event = event; 
+  })
+
+  // $scope.createComment = function (post){
+  //   var config = {
+    
+  //   }
+  //   Post.get( { id: post._id}, function (post) {
+
+  //   })
+  // }
 }]);
 
 

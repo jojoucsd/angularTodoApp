@@ -1,52 +1,43 @@
 <div class="container">
   <div class="row">
-  <div class="col-sm-5"><br/>
-   <calendar selected="day" ng-click= "postFilter(day, user); filterResult = true"></calendar>
-   <form class='post-search'>
-    <div class="input-append">
-      <input type="text" ng-model="search" value = "day" class="search-query">
-      <input type="text" ng-model="day">
-      <a class="clear" ng-click="day = ''">
-        <span class="glyphicon glyphicon-remove"></span>
-      </a>
-      <button type="submit" class="btn">Search</button>
+    <div class="col-sm-3"><br/>
+      <calendar selected="day" ng-click= "postFilter(day, user); user.filterResult = true"></calendar>
+      <h3>Total Tasks: {{user.posts.length}}</h3>
     </div>
-   </form>
-  </div>
-    <div class="col-sm-7">
-      <div class="page-header">
+
+    <div class="col-sm-9">
+      <div class="card">
         <h4>Tasks</h4>
+        <form ng-submit="createPost(user)">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input class="form-control" type="text" ng-model="post.title">
+          </div>
+          <div class="form-group">
+            <label for="detials">Detials</label>
+            <textarea class="form-control" ng-model="post.body"></textarea>
+          </div>
+          <button type="submit">Save</button>
+        </form>
       </div>
-      <form ng-submit="createPost(user)">
-        <div class="form-group">
-          <label for="title">Title</label>
-          <input class="form-control" type="text" ng-model="post.title">
-        </div>
-        <div class="form-group">
-          <textarea class="form-control" ng-model="post.body"></textarea>
-        </div>
-        <div></div>
-        <button type="submit">Save</button>
-      </form>
-      <hr>
-      <ul class='list-group'>
-        <div class='row' ng-hide="filterResult">
-          <div class='col-sm-4 col-md-3 col-lg-2' ng-repeat="post in user.posts | filter: search">
-          <div ng-hide="post.editForm">
+
+      <div class='col-sm-3 card' ng-repeat="post in user.posts" ng-hide="user.filterResult">
+        <div ng-hide="post.editForm">
           <h3>{{post.title}}</h3>
           <p>{{post.body}}</p>
-          <p>Created Date: {{post.created_at | date:'yyyy-MM-dd'}}</p>
+          <div class="card-date">{{post.created_at | date:'yyyy-MM-dd'}}</div>
           <a href="#" class="pull-right">
             <ng-md-icon icon="edit" style="fill: black" size="20" ng-click="post.editForm = true"></ng-md-icon>
           </a>
           <a href="#" class="pull-right" ng-click="postShow(post)">
            <ng-md-icon icon="comment" style="fill:black"></ng-md-icon>
-          </a> 
-          <a href="#" class='pull-right' ng-click="deletePost(post)">
-            <i class='icon ion-close-circled'></i>
-          </a>
-          </div>
-          <form  ng-show="post.editForm" ng-submit="updatePost(post)">
+         </a> 
+         <a href="#" class='pull-right' ng-click="deletePost(post)">
+          <i class='icon ion-close-circled'></i>
+        </a>
+      </div>
+        <div ng-show="post.editForm">
+          <form ng-submit="updatePost(post)">
             <div class="form-group">
               <input type="text" ng-model="post.title" class="form-control">
             </div>
@@ -55,23 +46,13 @@
             </div>
             <input type="submit" value="Save Post" class="btn btn-default">
           </form>
-          </div>
         </div>
-        <div class="col-sm-4 col-md-3 col-lg-2" ng-show="filterResult" ng-repeat="filter in filters">
-          <h3>{{filter.title}}</h3>
-          <p>{{filter.body}}</p>
-          <p>Created Date: {{filter.created_at}}</p>
-        </div>
-        <div class='col-sm-4 col-md-3 col-lg-2' ng-repeat="postshow in postshows">
-          <div>
-            <h3>{{postshow.title}}</h3>
-            <p>{{postshow.body}}</p>
-            <p>Created Date: {{postshow.created_at | date:'yyyy-MM-dd'}}</p>
-          <a href="#" class="pull-right" ng-click="postShow(post)">
-          </a> 
-          </div>
-        </div>
-      </ul>
+      </div>
+      <div class="col-sm-3 card" ng-show="user.filterResult" ng-repeat="filter in filters">
+        <h3>{{filter.title}}</h3>
+        <p>{{filter.body}}</p>
+        <div class="card-date">{{filter.created_at | date: 'yyyy-MM-dd'}}</div>
+      </div>
     </div>
   </div>
 </div>

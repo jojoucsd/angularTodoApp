@@ -38,16 +38,16 @@ angular.module('d2r-app')
 	// Tab Form on Dash
 	$scope.tabs = [{
 		title: 'Notes',
-		url: 'one.tpl.html'
+		url: 'note.tpl.html'
 	}, {
 		title: 'Tasks',
-		url: 'two.tpl.html'
+		url: 'task.tpl.html'
 	}, {
 		title: 'Events',
-		url: 'three.tpl.html'
+		url: 'event.tpl.html'
 	}];
 
-	$scope.currentTab = 'one.tpl.html';
+	$scope.currentTab = 'note.tpl.html';
 
 	$scope.onClickTab = function (tab) {
 		$scope.currentTab = tab.url;

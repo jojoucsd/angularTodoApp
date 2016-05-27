@@ -1,57 +1,46 @@
-<div class="container" ng-controller="UsersCtrl">
+<div class="container">
   <div class="row">
-    <div class="col-sm-5"><br/>
-     <calendar selected="day" ng-click="noteFilter(day, user) ; user.filterResult = true"></calendar>
-     <form class='post-search'>
-      <div class="input-append">
-        <input type="text" ng-model="search" value = "day" class="search-query">
-        <input type="text" ng-model="day">
-        <a class="clear" ng-click="day = ''">
-          <span class="glyphicon glyphicon-remove"></span>
-        </a>
-        <button type="submit" class="btn">Search</button>
-      </div>
-    </form>
-  </div>
-  <div class="col-sm-7">
-    <div class="page-header">
-      <h4>Notes</h4>
+    <div class="col-sm-3"><br/>
+       <calendar selected="day" ng-click="noteFilter(day, user); filterResult=true"></calendar>
+       <h3>Total Notes: {{user.notes.length}}</h3>
     </div>
-    <form ng-submit="createNote(user)">
-      <div class="form-group">
-        <label for="title">Notes</label>
-        <textarea class="form-control" ng-model="note.body"></textarea>
-      </div>
-      <div></div>
-      <button type="submit">Save</button>
-    </form>
-    <hr>
-    <ul class='list-group'>
-      <div class='row'>
-        <div ng-hide="user.filterResult" class='col-sm-4 col-md-3 col-lg-2' ng-repeat="note in user.notes | filter: search">
-          <div ng-hide="note.editForm">
-            <p>{{note.body}}</p>
-            <p>Created Date: {{note.created_at | date:'yyyy-MM-dd'}}</p>
-            <a href="#" class="pull-right">
-              <ng-md-icon icon="edit" style="fill: black" size="20" ng-click="note.editForm = true"></ng-md-icon>
-            </a>
-            <a href="#" class='pull-right' ng-click="deleteNote(note)">
-              <i class='icon ion-close-circled'></i>
-            </a>
+
+    <div class="col-sm-9">
+      <div class="card">
+        <h4>Notes</h4>      
+        <form ng-submit="createNote(user)">
+          <div class="form-group">
+            <textarea class="form-control" rows="3" ng-model="note.body"></textarea>
           </div>
-          <form  ng-show="note.editForm" ng-submit="updateNote(note)">
-            <div class="form-group">
-              <input type="text" ng-model="note.body" class="form-control">
-            </div>
-            <input type="submit" value="Save Note" class="btn btn-default">
-          </form>
-        </div>
-        <div class="col-sm-4 col-md-3 col-lg-2" ng-repeat="filter in filters" ng-show="user.filterResult">
-          <p>{{filter.body}}</p>
-          <p>Created Date: {{filter.created_at | date:'yyyy-MM-dd'}}</p>
-        </div>
+          <button class="btn btn-social"><i class="ion-plus" type="submit"></i></button>
+        </form>
       </div>
-    </ul>
+
+      <div ng-hide="filterResult" class='col-sm-3 card' ng-repeat="note in user.notes">
+        <div ng-hide="note.editForm">
+          <p>{{note.body}}</p>
+          <div class="card-date">{{note.created_at | date:'yyyy-MM-dd'}}</div>
+          <a href="#" class="pull-right">
+            <ng-md-icon icon="edit" style="fill: black" size="20" ng-click="note.editForm = true"></ng-md-icon>
+          </a>
+          <a href="#" class="pull-right" ng-click="noteShow(note)">
+           <ng-md-icon icon="comment" style="fill:black"></ng-md-icon>
+          </a> 
+          <a href="#" class='pull-right' ng-click="deleteNote(note)">
+            <i class='icon ion-close-circled'></i>
+          </a>
+        </div>
+        <form  ng-show="note.editForm" ng-submit="updateNote(note)">
+         <div class="form-group">
+            <input type="text" ng-model="note.body" class="form-control">
+         </div>
+            <input type="submit" value="Save Note" class="btn btn-default">
+        </form>
+      </div>
+      <div class="col-sm-3 card" ng-repeat="filter in filters" ng-show="filterResult">
+      <p>{{filter.body}}</p>
+      <div class="card-date">{{filter.created_at | date:'yyyy-MM-dd'}}</div>
+      </div>
+    </div>
   </div>
-</div>
 </div>

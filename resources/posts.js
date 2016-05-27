@@ -94,6 +94,14 @@ module.exports = function(app) {
 	  	})
 	  })
 
+	  app.get('/api/notes/:note_id', auth.ensureAuthenticated, function (req,res) { 
+	  	Note.findById(req.params.note_id, function(err, note) {
+	  		console.log('backend', note)
+	  		if (err) { return res.status(404).send(err); }
+	  		res.send(note);
+	  	});
+	  })
+	  
 	  app.post('/api/notes', auth.ensureAuthenticated, function (req,res) {
 	  	console.log(req.body)
 	  	User.findById(req.userId).exec(function(err, user) {

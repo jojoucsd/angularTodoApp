@@ -21,6 +21,14 @@ module.exports = function(app) {
 		});
 	});
 
+	app.get('/api/events/:event_id', auth.ensureAuthenticated, function (req,res) { 
+		Event.findById(req.params.event_id, function(err, event) {
+			console.log('backend', event)
+			if (err) { return res.status(404).send(err); }
+			res.send(event);
+		});
+	})
+
 	// filter events
 	app.post('/api/events/filter', auth.ensureAuthenticated, function (req,res){
 		console.log('backend', req.body)

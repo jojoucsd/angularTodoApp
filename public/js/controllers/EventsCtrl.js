@@ -1,12 +1,32 @@
 'use strict'
 
 angular.module('d2r-app')
-.controller('EventsCtrl', ['$scope', '$http', '$auth', 'Auth', function($scope, $http, $auth, Auth) {
+.controller('EventsCtrl', ['$scope', '$http', '$auth', 'Auth', '$location', function($scope, $http, $auth, Auth, $location) {
 	$http.get('/api/me').success(function(data){
 	$scope.user = data;	
 	})
 
 	$scope.event = {};
+
+	//Event Map Tabs
+
+	$scope.tabs = [{
+				title: 'Event',
+				url: 'event.tpl.html'
+				},{
+				title: 'Map',
+				url: 'map.tpl.html'
+	}];
+
+	$scope.currentTab = 'map.tpl.html';
+
+	$scope.onClickTab = function (tab) {
+		$scope.currentTab = tab.url;
+	};
+
+	$scope.isActiveTab = function(tabUrl) {
+		return tabUrl == $scope.currentTab;
+	};
 
 	//Event Filter
 	$scope.eventFilter = function(day, user){
@@ -21,6 +41,7 @@ angular.module('d2r-app')
 	  .success(function(response) {
 	    // console.log('filter result:', response)
 	    $scope.filters = response ;
+	    var filterResult = false;
 	  })
 	  $scope.filter = {};
 	}
@@ -65,4 +86,7 @@ angular.module('d2r-app')
 	    console.log(response)
 	  });
 	};
+	$scope.eventShow = function(event){
+	  $location.path('/tasks/'+ event._id + '/comments');
+	}
 }]);

@@ -1,82 +1,99 @@
  <div class="container">
    <div class="row">
-   <div class="col-sm-4"><br/>
-    <calendar selected="day" ng-click="eventFilter(day,user)"></calendar>
-    <h2>Total Events</h2>
-    <h2>{{user.events.length}}</h2>
-    <form class='event-search'>
-     <div class="input-append">
-       <input type="text" ng-model="search" value = "day" class="search-query">
-       <input type="text" ng-model="day">
-       <button type="submit" class="btn">Search</button>
+     <div class="col-sm-3"><br/>
+      <calendar selected="day" ng-click="eventFilter(day,user); filterResult=true"></calendar>
+      <h4>Total Events: {{user.events.length}}</h4>
      </div>
-    </form>
-   </div>
-     <div class="col-sm-8">
-     <ng-map center="current-location" zoom="11" styles="[{stylers:[{hue:'#e0efef '},{visibility:'on'},{saturation: '0'},{gamma: '0.5'}]},{elementType:'labels',stylers:[{visibility:'on'}]},{featureType:'water',stylers:[{color:'#dedede '}]}]">
-        <transit-layer></transit-layer>
-        <traffic-layer></traffic-layer>
-        <marker ng-repeat="event in user.events" position="{{event.location.formatted_address}}">
-        <marker>
-      </ng-map>
-       <div class="page-header"> 
-         <h4>Events</h4>
-       </div>
-       <form ng-submit="createEvent(user)">
-         <div class="form-group">
-           <label for="title">Title</label>
-           <input class="form-control" type="text" ng-model="event.title">
-         </div>
-         <div class="form-group">
-           <label for="title">Description</label>
-           <textarea class="form-control" ng-model="event.description"></textarea>
-         </div>
-         <div class="form-group">
-         <label for="title">Location</label>
-         <input class="form-control" type="text" ng-model="event.location" g-places-autocomplete options="autocompleteOptions">
-         </div>
-         <div class="form-group">
-         <label for="title">Date</label>
-         <input type="date" id="exampleInput" name="input" ng-model="event.date" placeholder="yyyy-MM-dd" required />
-         </div>
-         <button type="submit">Save</button>
-       </form>
-       <hr>
 
-       <ul class='list-group'>
-         <div class='row'>
-           <div class='col-sm-4 col-md-3 col-lg-2' ng-repeat="event in user.events | filter: search">
-           <div ng-hide="event.editForm">
-           <h3>{{event.title}}</h3>
-           <p>{{event.description}}</p>
-           <p>{{event.location.formatted_address}}</p> 
-           <p>{{event.created_at}}</p>
-           <p>{{event.date | date: 'EEE MMMM d @ hh:mma'}}</p>
-           <a href="#" class="pull-right">
+     <div class="col-sm-9">
+      <div class="card">
+          <div id="tabs">
+            <ul class="tabForm">
+              <li id="tab" ng-repeat="tab in tabs" 
+              ng-class="{active:isActiveTab(tab.url)}" 
+              ng-click="onClickTab(tab)">{{tab.title}}</li>
+            </ul>
+            <div id="mainView">
+              <div ng-include="currentTab"></div>
+            </div>
+          </div>
+
+          <script type="text/ng-template" id="event.tpl.html">
+            <div class="input-form" id="viewOne">
+              <form ng-submit="createEvent(user)">
+                <div class="form-group">
+                  <label for="title">Title</label>
+                  <input class="form-control" type="text" ng-model="event.title">
+                </div>
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea class="form-control" rows= "3" ng-model="event.description"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="location">Location</label>
+                  <input class="form-control" type="text" ng-model="event.location" g-places-autocomplete options="autocompleteOptions">
+                </div>
+                <div class="form-group">
+                  <label for="title">Date</label>
+                  <input type="date" id="datePicker" name="input" ng-model="event.date" placeholder="yyyy-MM-dd" required />
+                </div>
+                <button type="submit">Add</button>
+              </form>
+            </div>
+          </script>
+          
+          <script type="text/ng-template" id="map.tpl.html">
+            <div class="map-view" id="viewTwo">
+                <ng-map center="current-location" zoom="9" styles="[{stylers:[{hue:'#e0efef '},{visibility:'on'},{saturation: '0'},{gamma: '0.5'}]},{elementType:'labels',stylers:[{visibility:'on'}]},{featureType:'water',stylers:[{color:'#000000'},{lightness:'30'}]}]">
+                   <traffic-layer></traffic-layer>
+                   <traffic-layer> </traffic-layer>
+                   <marker ng-repeat="event in user.events" position="{{event.location.formatted_address}}">
+                   </marker>
+                 </ng-map>
+            </div>
+          </script>
+
+      </div> 
+        <div class='col-sm-3 card' ng-repeat="event in user.events | orderBy:'-created_at'" ng-hide="filterResult">
+          <div ng-hide="event.editForm">
+            <h3>{{event.title}}</h3>
+            <p>{{event.description}}</p>
+            <p>{{event.location.formatted_address}}</p> 
+            <div class="card-date">{{event.created_at | date: 'yyyy-MM-dd'}}</div>
+            <p>{{event.date | date: 'EEE MMMM d @ hh:mma'}}</p>
+            <a href="#" class="pull-right">
              <ng-md-icon icon="edit" style="fill: black" size="20" ng-click="event.editForm = true"></ng-md-icon>
-           </a>
-           <a href="#" class='pull-right' ng-click="deleteEvent(event)">
+            </a>
+            <a href="#" class="pull-right" ng-click="eventShow(event)">
+              <ng-md-icon icon="comment" style="fill:black"></ng-md-icon>
+            </a>
+            <a href="#" class='pull-right' ng-click="deleteEvent(event)">
              <i class='icon ion-close-circled'></i>
-           </a>
-           </div>
-           <form  ng-show="event.editForm" ng-submit="updateEvent(event)">
-             <div class="form-group">
-               <input type="text" ng-model="event.title" class="form-control">
-             </div>
-             <div class="form-group">
-               <input type="text" ng-model="event.description" class="form-control">
-             </div>
-             <div class="form-group">
-               <input type="text" ng-model="event.location" g-places-autocomplete options="autocompleteOptions" class="form-control">
-             </div>
-             <div class="form-group">
-               <input type="text" ng-model="day" class="form-control">
-             </div>
+            </a>
+          </div>
+          <form  ng-show="event.editForm" ng-submit="updateEvent(event)">
+            <div class="form-group">
+              <input type="text" ng-model="event.title" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="text" ng-model="event.description" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="text" ng-model="event.location" g-places-autocomplete options="autocompleteOptions" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="text" ng-model="day" class="form-control">
+            </div>
              <input type="submit" value="Save Post" class="btn btn-default">
-           </form>
-           </div>
-         </div>
-       </ul>
+          </form>
+        </div>
+        <div class="col-sm-3 card" ng-repeat="filter in filters" ng-show="filterResult">
+          <h3>{{filter.title}}</h3>
+          <p>{{filter.description}}</p>
+          <p>{{filter.location.formatted_address}}</p> 
+          <div class="card-date">{{filter.created_at | date: 'yyyy-MM-dd'}}</div>
+          <p>{{filter.date | date: 'EEE MMMM d @ hh:mma'}}</p>
+        </div>
      </div>
    </div>
  </div>

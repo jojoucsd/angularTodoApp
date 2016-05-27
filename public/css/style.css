@@ -3,8 +3,8 @@
 -------------------------------*/
 
 /*---- Profile Pic ----*/
-	#avatar {
-	    height: 50px;
+	.avatar {
+	    height: 220px;
 	    border-radius: 100%;
 	    border: 10px;
 	}
@@ -45,6 +45,7 @@
 	    background-color: #CCC;
 	    color: #696969;
 	}
+
 	#mainView {
 		clear: both;
 		padding: 0 1em;
@@ -621,3 +622,113 @@
 	}
 
 	.navbar-centered .site-logo{height:auto;max-height:80px;margin:0 auto !important;max-width: 100%;}
+
+	/*----------------
+	- DashBoard Page -
+	----------------*/
+
+	.dashboard {
+		min-width: 320px;
+		margin-top: -20px;
+		height: auto !important;
+		background: rgba(242,239,235,1);
+		padding-top: 20px;
+		max-width: 320px;
+		margin-left: 800px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid #000;
+	}
+
+	.frontfilter {
+		margin-left: 10px;
+		max-width: : 200px;
+
+	}
+
+	.card {
+		border-radius: 20px;
+		min-width: 230px;
+		max-width: 770px;
+		position: relative;
+		padding: 10px 10px 30px;
+		margin: 20px;
+		background: rgba(242,239,235,1);
+		font-family: Helvetica, sans-serif;
+		border-bottom: 3px solid #000;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-rendering: optimizeLegibility;
+		-webkit-tansition: all 0.3s 0.2s ease-out;
+		transition: all 0.3s 0.2s ease-out;
+	}
+
+	.card:hover {
+	  /*background: rgba(200,200,200,0.7);*/
+	  cursor: pointer;
+	  box-shadow: 0 5px 20px rgba(0,0,0,.8);
+	 /*   transform: translateY(-10px) scale(1.02);*/
+	}
+	.card-date {
+	    position: absolute;
+	    bottom: 9px;
+	    left: -10px;
+	    padding: 4px 8px;
+	    background: #000;
+	    color: #fff;
+	    font-family: YeezyB;
+	    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+	    -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+	    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+	}
+	.card-date:after {
+	    content: '';
+	    display: block;
+	    height: 20px;
+	    width: 8px;
+	    position: absolute;
+	    top: 31px;
+	    left: 0px;
+	    background: transparent;
+	    z-index: 1;
+	    border-top: 10px solid #000;
+	    border-left: 10px solid transparent;
+	}
+	.card-name {
+	    position: absolute;
+	    bottom: 13px;
+	    left: -10px;
+	    padding: 4px 8px;
+	    background: #000;
+	    color: #fff;
+	    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+	    -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+	    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+	}
+	.card-name:after {
+	    content: '';
+	    display: block;
+	    height: 20px;
+	    width: 8px;
+	    position: absolute;
+	    top: 34px;
+	    left: 0px;
+	    background: transparent;
+	    z-index: 1;
+	    border-top: 10px solid #000;
+	    border-left: 10px solid transparent;
+	}
+
+	.fade {
+	  opacity: 0;
+	  /* make things invisible upon start */
+	  -webkit-animation: fadeIn ease-in 1;
+	  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+	  -moz-animation: fadeIn ease-in 1;
+	  animation: fadeIn ease-in 1;
+	  -webkit-animation-fill-mode: forwards;
+	  -moz-animation-fill-mode: forwards;
+	  animation-fill-mode: forwards;
+	  -webkit-animation-duration: 1s;
+	  -moz-animation-duration: 1s;
+	  animation-duration: 1s;
+	}

@@ -2,18 +2,31 @@
 	<div class='row'>
 		<div class='col-sm-6 col-md-3 col-lg-2'>
 			<div>
-				<h2>ShareData Show</h2>
-				<!-- <h3>{{sharedData}}</h3> -->
-				<h3>{{sharedData[0].title}}</h3>
-				<p>{{sharedData[0].body}}</p>
-				<p>Created Date: {{sharedData[0].created_at | date:'yyyy-MM-dd'}}</p>
-			</div>
-			<div>
-				<h2>Post Promise Show</h2>
-				{{post}}
 				<h3>{{post.title}}</h3>
 				<p>{{post.body}}</p>
-				<p>Created Data: {{post.created_at}}</p>
+				<p>{{post.created_at}}</p>
+				<a href="#" class="pull-right" ng-click="createComment(post)">
+				 <ng-md-icon icon="comment" style="fill:black"></ng-md-icon>
+				</a>
+			</div>
+			<div>
+				<p>{{note.body}}</p>
+			</div>
+			<div>
+				<h3>{{event.title}}</h3>
+				<p>{{event.description}}</p>
+				<p>{{event.location.formatted_address}}</p> 
+				<p>{{event.created_at}}</p>
+				<p>{{event.date | date: 'EEE MMMM d @ hh:mma'}}</p>
 			</div>
 		</div>
+	</div>
 </div>
+
+<!-- <div>
+	<h3>{{sharedData}}</h3>
+	<h3>{{sharedData[0].title}}</h3>
+	<p>{{sharedData[0].body}}</p>
+	<p>Created Date: {{sharedData[0].created_at | date:'yyyy-MM-dd'}}</p>
+</div>
+ -->
