@@ -1,0 +1,32 @@
+<div class="container">
+	<div class='row'>
+		<div class='col-sm-3 post-it'><br/>
+			<h3>{{event.title}}</h3>
+			<p>{{event.description}}</p>
+			<!-- <p>{{event._id}}</p> -->
+			<p>{{event.user.email}}</p>
+			<p>{{event.user.displayName}}</p>
+			<div class="card-date">{{event.created_at | date: 'yyyy-MM-dd'}}</div>
+			<a href="#" class="pull-right" ng-click="createRsvp(event, user)">
+			 <ng-md-icon icon="person_add" style="fill:black"></ng-md-icon>
+			</a>
+		</div>
+
+		<div class='col-sm-9'>
+		<div class="card">
+			<h4>Comment</h4>
+			<form ng-submit="createComment(event, user)">
+				<div class="form-group">
+					<input type="text" class="form-control" ng-model="comment.body">
+				</div>
+				<button type="submit">Create</button>
+			</form>
+		</div>
+		<div class='col-sm-3 post-it' ng-repeat='comment in event.comments'>
+			<p>{{comment.body}}</p>
+			<p>Commented By: {{comment.user.email}}</p>
+			<p>Commented By: {{comment.user.displayName}}</p>
+			<p>{{comment.post}}</p>	
+		</div>
+	</div>
+</div>

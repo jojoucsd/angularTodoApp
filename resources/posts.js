@@ -1,6 +1,7 @@
 var Post = require('../models/post.js')
 , Note = require('../models/note.js')
 , User = require('../models/user.js')
+, Comment = require('../models/comment.js')
 , auth = require('./auth')
 
 module.exports = function(app) {
@@ -37,10 +38,26 @@ module.exports = function(app) {
 	})
 
 	app.get('/api/posts/:post_id', auth.ensureAuthenticated, function (req,res) { 
-		Post.findById(req.params.post_id, function(err, post) {
-			console.log('backend', post)
+		Post.findById(req.params.post_id)
+		.populate({
+			path:'comments',
+			populate: {
+				path:'user',
+				model: 'User'
+			}
+		})
+		.populate('user')
+		.exec(function(err, post) {
 			if (err) { return res.status(404).send(err); }
-			res.send(post);
+			res.send(post)
+			// Post.populate( post, {
+			// 	path: 'comments.user',
+			// 	model: 'User'}, 
+			// function (err, data){
+			// 	if(err) return callback(err);
+			// 	console.log('data', data)
+			// 	res.send(data)
+			// })			
 		});
 	})
 	

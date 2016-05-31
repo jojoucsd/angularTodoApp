@@ -38,6 +38,12 @@ angular.module('d2r-app.services', [])
   });
 })
 
+.factory('Comment', function ($window, $resource){
+  return $resource($window.location.origin + '/api/comments/:id', { id: '@id'}, {
+    update: { method: 'GET'}
+  });
+})
+
 .service('srvShareData', function($window) {
   var KEY = 'App.SelectedValue';
 

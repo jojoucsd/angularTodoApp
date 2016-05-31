@@ -21,7 +21,7 @@
         </form>
       </div>
 
-      <div class='col-sm-3 card' ng-repeat="post in user.posts" ng-hide="user.filterResult">
+      <div class='col-sm-3 post-it' ng-repeat="post in user.posts" ng-hide="user.filterResult">
         <div ng-hide="post.editForm">
           <h3>{{post.title}}</h3>
           <p>{{post.body}}</p>

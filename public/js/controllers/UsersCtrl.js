@@ -106,12 +106,12 @@ $scope.createPost = function(user) {
 
   $scope.postShow = function(post) {
     // console.log(post._id)
-    $location.path('/tasks/'+ post._id + '/comments');
+    $location.path('/task/'+ post._id + '/comments');
     // console.log('First', post)
   }
 
   $scope.noteShow = function(note){
-    $location.path('/tasks/'+ note._id + '/comments');
+    $location.path('/note/'+ note._id + '/comments');
   }
   // Note Section
   $scope.createNote = function(user) {
@@ -145,35 +145,8 @@ $scope.createPost = function(user) {
         console.log(response)
       });
     };
-  }])
+  }]);
 
-.controller('CommentsCtrl', ['Post','Note', 'Event', 'Auth', '$scope', '$http', '$location', '$routeParams', 'srvShareData', function (Post, Note, Event, Auth, $scope, $http, $location, $routeParams, srvShareData){
-  console.log('CommentsCtrl is in play');
-  // $scope.sharedData = srvShareData.getData();
-  Post.get({ id: $routeParams.id}, function(post){
-    console.log('post', post);
-    $scope.post = post;
-  })
-
-  Note.get({ id: $routeParams.id}, function(note){
-    console.log('note', note)
-    $scope.note = note;
-  })
-
-  Event.get({ id: $routeParams.id}, function(event){
-    console.log('event', event)
-    $scope.event = event; 
-  })
-
-  // $scope.createComment = function (post){
-  //   var config = {
-    
-  //   }
-  //   Post.get( { id: post._id}, function (post) {
-
-  //   })
-  // }
-}]);
 
 
 

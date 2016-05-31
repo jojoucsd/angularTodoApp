@@ -22,7 +22,16 @@ module.exports = function(app) {
 	});
 
 	app.get('/api/events/:event_id', auth.ensureAuthenticated, function (req,res) { 
-		Event.findById(req.params.event_id, function(err, event) {
+		Event.findById(req.params.event_id)
+		.populate({
+			path: 'comments',
+			populate: {
+				path: 'user',
+				model: 'User'
+			}
+		})
+		.populate('user')
+		.exec(function(err, event) {
 			console.log('backend', event)
 			if (err) { return res.status(404).send(err); }
 			res.send(event);
@@ -34,9 +43,9 @@ module.exports = function(app) {
 		console.log('backend', req.body)
 		User.findById(req.body.user).exec(function (err, user){
 			console.log('user', user)
-				Event.find({ created_at: {$gte: req.body.startDate,
-										 $lte: req.body.finishDate},
-							user: req.body.user
+			Event.find({ created_at: {$gte: req.body.startDate,
+				$lte: req.body.finishDate},
+				user: req.body.user
 			}, function(err, event){
 				if (err){
 					console.log(err)
@@ -78,7 +87,7 @@ module.exports = function(app) {
 	app.delete('/api/events/:event_id', function(req, res) {
 		Event.findByIdAndRemove({
 			_id : req.params.event_id
-		 }, function(err, event) {
+		}, function(err, event) {
 			if (err)
 				res.send(err);
 
@@ -97,7 +106,7 @@ module.exports = function(app) {
 					}
 					
 				});
-			});
+		});
 	});
 
 

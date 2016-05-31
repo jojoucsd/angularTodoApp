@@ -86,7 +86,8 @@ angular.module('d2r-app')
 	    console.log(response)
 	  });
 	};
+
 	$scope.eventShow = function(event){
-	  $location.path('/tasks/'+ event._id + '/comments');
+	  $location.path('/event/'+ event._id + '/comments');
 	}
 }]);

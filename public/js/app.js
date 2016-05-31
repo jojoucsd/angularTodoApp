@@ -51,9 +51,14 @@ angular.module('d2r-app', ['d2r-app.services',
         controller: 'UsersCtrl'
       })
       
-      $routeProvider.when('/tasks/:id/comments', {
+      $routeProvider.when('/task/:id/comments', {
         templateUrl: 'templates/task-show',
-        controller: 'CommentsCtrl'
+        controller: 'PostShowCtrl'
+      })
+
+      $routeProvider.when('/event/:id/comments', {
+        templateUrl: 'templates/event-show',
+        controller: 'EventShowCtrl'
       })
 
       $routeProvider.otherwise({redirectTo: '/'});

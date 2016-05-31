@@ -54,7 +54,7 @@
           </script>
 
       </div> 
-        <div class='col-sm-3 card' ng-repeat="event in user.events | orderBy:'-created_at'" ng-hide="filterResult">
+        <div class='col-sm-3 post-it' ng-repeat="event in user.events | orderBy:'-created_at'" ng-hide="filterResult">
           <div ng-hide="event.editForm">
             <h3>{{event.title}}</h3>
             <p>{{event.description}}</p>
@@ -87,7 +87,7 @@
              <input type="submit" value="Save Post" class="btn btn-default">
           </form>
         </div>
-        <div class="col-sm-3 card" ng-repeat="filter in filters" ng-show="filterResult">
+        <div class="col-sm-3 post-it" ng-repeat="filter in filters" ng-show="filterResult">
           <h3>{{filter.title}}</h3>
           <p>{{filter.description}}</p>
           <p>{{filter.location.formatted_address}}</p> 
