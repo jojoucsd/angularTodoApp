@@ -6,8 +6,17 @@
   </div>
   <div class="col-sm-5"><br/>
   <h3> Api News Col </h3>
+    <button ng-click="nba()">News</button>
+    <div ng-repeat = "new in news">
+      <p>{{new.title}}</p>
+      <a href="{{new.url}}" target="#">detial<a>
+      </div>
   </div>
-  <div class="col-sm-4">
-  <h3> Extra Sections </h3>
+  <div class="col-sm-4"><br/>
+    <div ng-repeat = "element in elements">
+      <p>{{element.title}}</p>
+      <a href="{{element.url}}" target="#">link</a>
+    </div>
+    <p>Display Events here</p>
   </div>
 </div>

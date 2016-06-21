@@ -1,0 +1,39 @@
+<div class="container">
+	<div class='row'>
+		<div class='col-sm-3 post-it'><br/>
+		<p>{{group.title}}</p>
+		<p>{{group.description}}</p>
+		<p>{{group.owner}}</p>
+		<a href="#" class="pull-right" ng-click="jointGroup(group, user); userFound=true">
+		 <ng-md-icon ng-hide="userFound" icon="person_add" style="fill:black"></ng-md-icon>	
+		</a>
+		<a href='#' class='pull-right' ng-click="unjointGroup(group, user)">
+		 <ng-md-icon icon="error" ng-show="ownerFound()" style="fill:black"></ng-md-icon>
+		 </a>
+		<br>
+		<div class ='card'><br/>
+			<p>RSVP name here</p>
+				{{group.users}}
+		</div>
+		</div>
+
+		<div class='col-sm-9'>
+		<div class="card">
+			<h4>Comment</h4>
+			<form ng-submit="groupComment(group, user)">
+				<div class="form-group">
+					<input type="text" class="form-control" ng-model="group.comment">
+				</div>
+				<button type="submit">Create</button>
+			</form>
+		</div>
+		<div class='col-sm-3 post-it' ng-repeat='comment in group.comments'>
+			<p>{{comment.body}}</p>
+			<p>Commented By: {{comment.user.displayName}}</p>
+			<div class="card-date">{{comment.created_at | date: 'yyyy-MM-dd'}}</div>
+			<a href="#" class="pull-right" ng-click="deleteComment(comment)">
+			 <ng-md-icon icon="delete_forever" style="fill:black"></ng-md-icon>
+			</a>	
+		</div>
+	</div>
+</div>

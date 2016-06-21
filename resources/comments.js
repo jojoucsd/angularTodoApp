@@ -14,7 +14,7 @@ module.exports = function(app) {
 			.populate('comments')
 			.populate('user')
 			.exec(function(err,post){
-				console.log('commentor email in post: ', post.user.email)
+				// console.log('commentor email in post: ', post.user.email)
 				var comment = new Comment(req.body);
 				comment.save(function(err, comment){
 					post.comments.unshift(comment._id);

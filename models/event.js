@@ -10,7 +10,7 @@ var EventSchema = Schema({
   updated_at: { type: Date },
   user : {type: Schema.Types.ObjectId, ref: 'User'},
   comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}],
-  rsvps: [{type: Schema.Types.ObjectId, ref: 'Rsvp'}],
+  rsvp: {type: Schema.Types.ObjectId, ref: 'Rsvp'},
   color: String,
 });
 

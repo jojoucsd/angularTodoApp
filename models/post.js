@@ -8,8 +8,7 @@ var PostSchema = Schema({
   updated_at : { type: Date },
   user : {type: Schema.Types.ObjectId, ref: 'User'},
   comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}],
-  color: String,
-
+  color: {type: String, default: "default"},
 });
 
 // MIDDLEWARE

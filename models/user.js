@@ -17,9 +17,9 @@ var UserSchema = new Schema({
   , posts         : [{ type: Schema.Types.ObjectId, ref: 'Post' }]
   , notes         : [{ type: Schema.Types.ObjectId, ref: 'Note'}]
   , events        : [{ type: Schema.Types.ObjectId, ref: 'Event'}]
-  // , comments      : [{ type: Schema.Types.ObjectId, ref: 'Comment'}]
-  // , rsvps         : [{ type: Schema.Types.ObjectId, ref: 'Rsvp'}]
-  , displayName   : { type: String, trim: true}
+  // , groups        : [{ type: Schema.Types.ObjectId, ref: 'Group'}]
+  , rsvps         : [{ type: Schema.Types.ObjectId, ref: 'Rsvp'}]
+  , displayName   : { type: String }
   , facebook      : { type: String }
   , google        : { type: String }
   , picture       : { type: String }

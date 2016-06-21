@@ -1,4 +1,5 @@
 var Event = require('../models/event.js')
+, Rsvp = require('../models/rsvp.js')
 , User = require('../models/user.js')
 , auth = require('./auth')
 
@@ -31,6 +32,7 @@ module.exports = function(app) {
 			}
 		})
 		.populate('user')
+		.populate('rsvp')
 		.exec(function(err, event) {
 			console.log('backend', event)
 			if (err) { return res.status(404).send(err); }
@@ -67,6 +69,16 @@ module.exports = function(app) {
 					res.send(err);
 				user.events.unshift(event._id);
 				user.save();
+				console.log('event body', event._id);
+				var rsvp = new Rsvp();
+				rsvp.event = event._id;
+				rsvp.save(function(err, rsvp){
+					// user.events.unshift(event._id);
+					event.rsvp = rsvp._id;
+					// user.save();
+					event.save();
+					// res.send(rsvp);
+				})
 				res.send(event);				
 			});
 		});

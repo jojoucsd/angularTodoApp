@@ -4,8 +4,10 @@ var mongoose = require('mongoose');
 var RsvpSchema = Schema({
 		created_at : { type: Date, default: Date.now() },
 		updated_at : { type: Date },
-		event: [{ type: Schema.ObjectId, ref: 'Event'}],
-		user: [{ type: Schema.ObjectId, ref: 'User'}],
+		event: { type: Schema.ObjectId, ref: 'Event'},
+		comment: { type: Schema.ObjectId, ref: 'Comment'},
+		users: [{ type: Schema.ObjectId, ref: 'User'}],
+		
 	})
 
 // MIDDLEWARE

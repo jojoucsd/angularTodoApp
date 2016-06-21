@@ -1,9 +1,30 @@
+<div class='overlay'>
+	<div class="center">
+		<div class="content">
+			<div class="splashname"><h2 ng-show="currentUser">Hi, {{user.displaName}}</h2>
+				<div class="neon"><a href='#' data-toggle="modal" data-target="#login-modal"><img src="/img/logo.png" alt="logo" class="site-logo"></a></div>
+				<div class="splashname"><h2 ng-show="currentUser"> <time>TICK, TOCK.</time></h2></div>
+			</div>
+			<div ng-show="currentUser">
+				<ul ticker timing="3000">
+					<li ng-repeat="new in elements | limitTo:20">
+						<div>
+							<a href="{{new.url}}" target="#">
+								{{new.title}}
+							</a>
+						</div>
+					</li>
+				</ul>
+			</div>      
+		</div>
+	</div>
+</div>
 
-<div class="item" id="results">
+<!-- <div class="item" id="results">
   <img class="splashimg" ng-src={{flashImg}}>
   <div class="container">
     <div class="carousel-caption">
-      <a data-toggle="modal" data-target="#login-modal"><img src="/img/logo.png" alt="logo" class="site-logo"></a>
+      <a href='#' data-toggle="modal" data-target="#login-modal"><img src="/img/logo.png" alt="logo" class="site-logo"></a>
     </div>
   </div>
-</div>
+</div> -->

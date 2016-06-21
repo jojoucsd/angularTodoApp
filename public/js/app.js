@@ -8,17 +8,17 @@ angular.module('d2r-app', ['d2r-app.services',
                               'd2r-app.calendar',
                               'ngMdIcons',
                               'google.places',
-                              'ngMap'])
+                              'ngMap',
+                              'toastr',])
 
     .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
       $routeProvider.when('/', {
-        templateUrl: 'templates/splash',
-        controller: 'ApiCtrl'
+        templateUrl: 'templates/splash'
       });
 
       $routeProvider.when('/profile', {
         templateUrl: 'templates/profile',
-        controller: 'UsersCtrl'
+        controller: 'ApiCtrl'
       })
 
       $routeProvider.when('/dashboard', {
@@ -60,6 +60,26 @@ angular.module('d2r-app', ['d2r-app.services',
         templateUrl: 'templates/event-show',
         controller: 'EventShowCtrl'
       })
+
+      $routeProvider.when('/groups', {
+        templateUrl: 'templates/groups',
+        controller: 'GroupCtrl'
+      })
+
+      $routeProvider.when('/group/:id', {
+        templateUrl: 'templates/group-show',
+        controller: 'GroupShowCtrl'
+      })
+      
+      // $routerProvider.when('/event/:id/rsvps', {
+      //   templateUrl: 'templates/event-rsvp',
+      //   controller: 'EventShowCtrl'
+      // })
+
+      // $routeProvider.when('/event/:id/rsvp/:id', {
+      //   templateUrl: 'templates/rsvp-detial',
+      //   controller: 'EventShowCtrl'
+      // })
 
       $routeProvider.otherwise({redirectTo: '/'});
 

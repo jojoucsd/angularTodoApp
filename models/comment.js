@@ -7,7 +7,8 @@ var CommentSchema = Schema({
 		updated_at : { type: Date },
 		user: { type: Schema.Types.ObjectId, ref: 'User'},
 		post: {type: Schema.Types.ObjectId, ref: 'Post'},
-		event: {type: Schema. Types.ObjectId , ref: 'Event'},
+		event: {type: Schema.Types.ObjectId , ref: 'Event'},
+		group: {type: Schema.Types.ObjectId , ref: 'Group'},
 	})
 
 // MIDDLEWARE

@@ -3,7 +3,7 @@
 /* USER Controllers */
 
 angular.module('d2r-app')
-.controller('UsersCtrl', ['$scope', '$http', '$auth', 'Auth', '$location', '$window', 'srvShareData', '$routeParams', function($scope, $http, $auth, Auth, $location, $window, srvShareData, $routeParams) {
+.controller('UsersCtrl', ['$scope', '$http', '$auth', 'Auth', '$location', '$window','$routeParams', 'toastr', function($scope, $http, $auth, Auth, $location, $window, $routeParams, toastr) {
   $http.get('/api/me').success(function(data){
     $scope.user = data; 
   })
@@ -62,6 +62,7 @@ $scope.createPost = function(user) {
       };
       $http.post('/api/posts', config)
       .success(function(response) {
+        toastr.success('Tasks Created!')
         console.log('response', response)
         $scope.user.posts.unshift(response);
       })

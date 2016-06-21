@@ -4,11 +4,8 @@
 			<h3>{{post.title}}</h3>
 			<p>{{post.body}}</p>
 			<p>{{post._id}}</p>
-			<p>{{post.user.email}}</p>
+			<p>{{post.user.displayName}}</p>
 			<div class="card-date">{{post.created_at | date: 'yyyy-MM-dd'}}</div>
-			<a href="#" class="pull-right" ng-click="createComment(post)">
-			 <ng-md-icon icon="comment" style="fill:black"></ng-md-icon>
-			</a>
 		</div>
 
 		<div class='col-sm-9'>
@@ -23,9 +20,11 @@
 		</div>
 		<div class='col-sm-3 post-it' ng-repeat='comment in post.comments'>
 			<p>{{comment.body}}</p>
-			<p>Commented By: {{comment.user.email}}</p>
 			<p>Commented By: {{comment.user.displayName}}</p>
-			<p>{{comment.post}}</p>	
+			<div class="card-date">{{comment.created_at | date: 'yyyy-MM-dd'}}</div>
+			<a href="#" class="pull-right" ng-click="createComment(post)">
+			 <ng-md-icon icon="delete_forever" style="fill:black"></ng-md-icon>
+			</a>	
 		</div>
 	</div>
 </div>

@@ -13,7 +13,7 @@ angular.module('d2r-app.services', [])
         _id: user.sub,
         email: user.email,
         picture: user.picture,
-        displayName: user.displayName
+        displayName: user.displayName,
       }
       return currentUser;
     }
@@ -40,34 +40,62 @@ angular.module('d2r-app.services', [])
 
 .factory('Comment', function ($window, $resource){
   return $resource($window.location.origin + '/api/comments/:id', { id: '@id'}, {
-    update: { method: 'GET'}
+    update: { method: 'PUT'},
   });
 })
 
-.service('srvShareData', function($window) {
-  var KEY = 'App.SelectedValue';
-
-  var addData = function(newObj) {
-    var mydata = $window.sessionStorage.getItem(KEY);
-    if (mydata) {
-      mydata = JSON.parse(mydata);
-    } else {
-      mydata = [];
-    }
-    mydata.unshift(newObj);
-    $window.sessionStorage.setItem(KEY, JSON.stringify(mydata));
-  };
-
-  var getData = function(){
-    var mydata = $window.sessionStorage.getItem(KEY);
-    if (mydata) {
-      mydata = JSON.parse(mydata);
-    }
-    return mydata || [];
-  };
-
-  return {
-    addData: addData,
-    getData: getData
-  };
+.factory('Group', function ($window, $resource){
+  return $resource($window.location.origin + '/api/groups/:id', { id: '@id'}), {
+    update: { method: 'PUT'},
+  }
 });
+
+// .service('srvShareData', function($window) {
+//   var KEY = 'App.SelectedValue';
+
+//   var addData = function(newObj) {
+//     var mydata = $window.sessionStorage.getItem(KEY);
+//     if (mydata) {
+//       mydata = JSON.parse(mydata);
+//     } else {
+//       mydata = [];
+//     }
+//     mydata.unshift(newObj);
+//     $window.sessionStorage.setItem(KEY, JSON.stringify(mydata));
+//   };
+
+//   var getData = function(){
+//     var mydata = $window.sessionStorage.getItem(KEY);
+//     if (mydata) {
+//       mydata = JSON.parse(mydata);
+//     }
+//     return mydata || [];
+//   };
+
+//   return {
+//     addData: addData,
+//     getData: getData
+//   };
+// })
+
+// .service('APIService', function ($http) {
+//     return {
+//         getWork: function() {
+//             return $.ajax({
+//                 url: "https://api.fantasydata.net/nba/v2/JSON/News",
+//                 beforeSend: function (xhrObj) {
+//                     // Request headers
+//                     xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", "45a3f3bf69404c5ea7edbd03c2f7e128");
+//                 },
+//                 type: "JSON"             
+//             })
+//         .done(function (data) {
+//             alert("success");
+//         })
+//         .fail(function () {
+//             alert("error");
+//         });
+//     }
+//   }
+// });
+

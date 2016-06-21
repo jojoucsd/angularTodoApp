@@ -26,7 +26,7 @@ angular.module('d2r-app')
     $scope.signup = function() {
       $auth.signup($scope.user)
         .then(function(response) {
-          console.log(response)
+          console.log('user response', response)
           $auth.setToken(response);
           $scope.isAuthenticated();
           $scope.user = {};

@@ -3,6 +3,7 @@
      <div class="col-sm-3"><br/>
       <calendar selected="day" ng-click="eventFilter(day,user); filterResult=true"></calendar>
       <h4>Total Events: {{user.events.length}}</h4>
+      <div class="card" id="directions-panel"></div>
      </div>
 
      <div class="col-sm-9">
@@ -49,6 +50,13 @@
                    <traffic-layer> </traffic-layer>
                    <marker ng-repeat="event in user.events" position="{{event.location.formatted_address}}">
                    </marker>
+                   <directions
+                     draggable="true"
+                     panel="directions-panel"
+                     travel-mode="DRIVING"
+                     origin="current-location"
+                     destination="{{event.location.formatted_address}}}">
+                   </directions>
                  </ng-map>
             </div>
           </script>

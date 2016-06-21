@@ -44,6 +44,7 @@ require('./resources/apis')(app);
 require('./resources/events')(app);
 require('./resources/comments')(app);
 require('./resources/rsvps')(app);
+require('./resources/groups')(app);
 // redirect all others to the index (HTML5 history)
 app.get('*', resources.index);
 

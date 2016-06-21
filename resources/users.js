@@ -16,6 +16,7 @@ module.exports = function(app) {
     .populate('notes')
     .populate('comments')
     .populate('rsvps')
+    .populate('groups')
     .exec(function(err, user) {
       console.log(user)
       res.send(user);
@@ -56,6 +57,7 @@ module.exports = function(app) {
       }
       
       var user = new User({
+        displayName: req.body.displayName,
         email: req.body.email,
         password: req.body.password
       });

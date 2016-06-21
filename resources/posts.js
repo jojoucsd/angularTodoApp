@@ -79,7 +79,6 @@ module.exports = function(app) {
 	  				console.log(err)
 	  				return res.send(err);
 	  			}
-	  			console.log(req.query.body)
 	  			User.findOneAndUpdate(
 	  				{ posts: req.params.post_id},
 	  				{ "$pull": {"posts": req.params.post_id}},
@@ -87,11 +86,20 @@ module.exports = function(app) {
 	  					if(err) {return res.send(err);}
 	  					else{
 	  						console.log("OBjectID", post);
-	  						res.status(200).send('Find User and deleted Post');
+	  						Comment.remove({ post: req.params.post_id},
+	  							function(err, comment){
+	  								if (err) {
+	  									console.log(err)
+	  									return res.send(err)
+	  								}
+	  								console.log('comment delete')
+	  								res.status(200).send('Find User and deleted Post');
+	  							})
 	  					}  					
 	  				})
 	  		})
-	  	});
+	  	})
+
 	  //notes secion, filter
 	  app.post('/api/notes/filter', auth.ensureAuthenticated, function (req,res){
 	  	console.log('backend', req.body)
