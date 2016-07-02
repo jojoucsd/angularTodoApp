@@ -682,6 +682,88 @@
 	  -moz-animation-duration: 1s;
 	  animation-duration: 1s;
 	}
-/*----Post-it----*/
 
+/*----SideBar----*/
+
+.hamb{
+  width: 28px;
+  height: 5px;
+  background: white;
+  margin-bottom: 3px;
+}
+
+.page-content {
+  width: 75%;
+  margin: auto;
+  position: relative;
+  z-index: 0;
+  -webkit-transition: all 0.15s ease-out 0;
+  -moz-transition: all 0.15s ease-out 0;
+  transition: all 0.15s ease-out 0;
+  background: #eeeeee; 
+}
+
+.toggle {
+  text-decoration: none;
+  font-size: 30px;
+  color: black;
+  -webkit-transition: all 0.15s ease-out 0;
+  -moz-transition: all 0.15s ease-out 0;
+  transition: all 0.15s ease-out 0;
+  position: fixed;
+  top: 10px;
+  left: 20px;
+  z-index: 1;
+  cursor: pointer; 
+  transition: .8s;
+}
+
+.sidebar {
+  position: fixed;
+  
+  top: 45px;
+  bottom: 0px;
+  left: -180px;
+  -webkit-transition: all 0.15s ease-out 0;
+  -moz-transition: all 0.15s ease-out 0;
+  transition: all 0.15s ease-out 0;
+  width: 120px;
+  padding: 30px;
+  background: #333333;
+  z-index: 11; 
+  transition: .7s;
+}
+  
+.sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+
+.sidebar li {
+    color: rgba(255, 255, 255, 0.8);
+    font-family: "Ubuntu", sans-serif;
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 16px;
+    -webkit-font-smoothing: antialiased;
+    cursor: pointer; }
+   
+.sidebar li:hover {
+      color: white; }
+
+#sidebartoggler {
+  display: none; 
+}
+  #sidebartoggler:checked + .page-wrap .sidebar {
+    left: 0px; 
+    transition: .6s;
+  }
+  #sidebartoggler:checked + .page-wrap {
+    left: 200px; 
+    transition: .6s;
+  }
+  #sidebartoggler:checked + .page-wrap .page-content {
+    opacity: .8;
+   
+  }
 

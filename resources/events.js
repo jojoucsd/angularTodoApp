@@ -90,7 +90,7 @@ module.exports = function(app) {
 		Event.findOneAndUpdate({ _id: req.params.event_id}, req.body , function (err, event) {
 			// console.log("editRoute", post);
 			if (err) { return res.send(err); }
-			// console.log('backend',post);
+			console.log('backend',event);
 			res.send(event);
 		});
 	})

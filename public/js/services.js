@@ -48,6 +48,25 @@ angular.module('d2r-app.services', [])
   return $resource($window.location.origin + '/api/groups/:id', { id: '@id'}), {
     update: { method: 'PUT'},
   }
+})
+
+.factory('navGroup', function(){
+  return {
+    groups: [] 
+  };    
+})
+
+.factory('myService', function($rootScope) {
+  var x = [];
+  return {
+    getX: function () {
+      return x;
+    },
+    setX: function(val) {
+     x = val;
+     $rootScope.$broadcast('event:x');
+   }
+ }
 });
 
 // .service('srvShareData', function($window) {

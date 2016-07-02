@@ -18,17 +18,24 @@
 					</div>
 					<button type="submit">Create</button>
 				</form>
+				<form ng-submit="test()">
+				<input type="text" ng-model="x" ng-change="setX()" /> 
+				<button type="submit">Submit</button>
+				</form>
+
+				<!-- {{x}} -->
 			</div>
 
 			<div class='col-sm-3 post-it' ng-repeat="group in groups ">
 				<p>{{group.title}}</p>
 				<p>{{group.description}}</p>
 				<p>{{group.owner}}</p>
+				<p>{{jointedGroup}}</p>
 				<a href="#" class="pull-right" ng-click="groupDetials(group)">
 				 <ng-md-icon icon="pageview" style="fill:black"></ng-md-icon>
 				</a>
 				<a href="#" class="pull-right" ng-click="deleteGroup(group)">
-				 <ng-md-icon icon="delete_forever" style="fill:black"></ng-md-icon>
+				 <ng-md-icon icon="delete_forever" style="fill:black" ng-if="group.owner == user._id"></ng-md-icon>
 				</a>
 			</div>
 		</div>

@@ -4,25 +4,30 @@
 
 angular.module('d2r-app')
 
-.controller('GroupCtrl', ['Comment','Post','Event', 'Auth', '$scope', '$http', '$location', '$routeParams', function (Comment, Post, Event, Auth, $scope, $http, $location, $routeParams){
+.controller('GroupCtrl', ['myService','$rootScope','Comment','Post','Event', 'Auth', '$scope', '$http', '$location', '$routeParams', function (myService, $rootScope, Comment, Post, Event, Auth, $scope, $http, $location, $routeParams){
   console.log('GroupCtrl is in play');
-  $scope.group = {};
 
+  // $scope.x = myService.getX();
+
+  // $rootScope.$on('event:x', function() {
+  //   $scope.x = myService.getX();
+  // });
+
+  // $scope.setX = function() {
+  //   myService.setX($scope.x);
+  // }
+  // $scope.test = function(){
+  //   console.log('test service')
+  // }
+  $scope.groups = {};
   $http.get('/api/me').success(function(data){
     $scope.user = data; 
-    console.log('data', $scope.user)
+    // console.log('data', $scope.user)
     $http.get('/api/groups').success(function(group){
       console.log('group is', group)
-      var outcome = []
-      for (var groupIndex in group){
-          outcome.push(group[groupIndex].title)
-      }
-      console.log('group title', outcome)
-      $scope.groups = group
-      
+      $scope.groups =  group;
+      $scope.x = group
       $scope.createGroup = function (user) {
-        console.log('inside', $scope.group.title)
-        
         var config = {
           title: $scope.group.title,
           description: $scope.group.description,
@@ -32,8 +37,17 @@ angular.module('d2r-app')
         console.log('config', config)
         $http.post('/api/groups', config)
         .success(function(response){
-          console.log('response', response)
+          // console.log('response', response)
           $scope.groups.unshift(response)
+
+          $scope.x = 
+          $rootScope.$on('event:x', function() {
+            $scope.x = myService.getX();
+          });
+
+          $scope.setX = function() {
+            myService.setX($scope.x);
+          }
         })
         .error(function(response){
           console.log('err', response)
@@ -41,10 +55,6 @@ angular.module('d2r-app')
       }
     })
   })
-
-  // $scope.jointed = function(user){
-  //   console.log('user')
-  // }
 
   $scope.deleteGroup = function (group){
     // console.log('group', group)
@@ -88,25 +98,29 @@ angular.module('d2r-app')
       // console.log('found', response)
       $scope.group = response;
       $scope.comment = response.comments
-      console.log('user', $scope.user._id)
+      // console.log('user', $scope.user._id)
+      console.log('group', $scope.group)
       console.log('owner', $scope.group.owner)
-      $scope.ownerFound = function(){
-          if ($scope.group.owner = $scope.user._id){
-           return true
-          }
-           return false
+
+      if ($scope.group.owner == $scope.user._id){
+        $scope.Owner = true
+        console.log('owner', $scope.Owner) 
+      }else {
+        $scope.Owner = false
+        console.log('false', $scope.Owner)
       }
+
       var users = $scope.group.users
-        for (var userIndex in users){
-          console.log('userindex', users[userIndex])
-          console.log('user ID', $scope.user._id)
-          if (users[userIndex] == $scope.user._id){
-            $scope.userFound = true
-            console.log('userFound', $scope.userFound)
-            break
-          }
+      for (var userIndex in users){
+        console.log('userindex', users[userIndex])
+        console.log('user ID', $scope.user._id)
+        if (users[userIndex] == $scope.user._id){
+          $scope.userFound = true
+          console.log('userFound', $scope.userFound)
+          break
         }
-      })
+      }
+    })
     }
   })
 
@@ -138,7 +152,7 @@ angular.module('d2r-app')
       var users = $scope.group.users;
       // console.log('group userArray', users)
       for ( var userIndex in users) {
-          console.log('users', users[userIndex])
+        console.log('users', users[userIndex])
         if (users[userIndex] == user._id){
           $scope.group.users.splice(userIndex, 1)
           break
@@ -150,9 +164,9 @@ angular.module('d2r-app')
   $scope.groupComment = function (group, user) {
 
     var config = {
-        user: user._id,
-        group: group._id,
-        body: group.comment,
+      user: user._id,
+      group: group._id,
+      body: group.comment,
     }
 
     $http.post('/api/groups/'+ group._id + '/comments', config)

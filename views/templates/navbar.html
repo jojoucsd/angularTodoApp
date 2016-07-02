@@ -1,99 +1,112 @@
-<nav class="main-nav navbar navbar-fixed-top navbar-transparent" ng-show="currentUser">
-  <div class="navbar-header">
-    <!-- ======= LOGO ========--><a href="/" class="navbar-brand scrollto"><img src="/img/logo.png" alt="logo" class="site-logo"></a>&#x9;&#x9;&#x9;
-    &#x9;&#x9;&#x9;
-    <span><a ngsf-toggle-fullscreen show-if-fullscreen-enabled>
-      <i show-if-fullscreen=false class="ion-arrow-expand"></i>
-      <i show-if-fullscreen=true class="ion-arrow-shrink"></i>
-    </a></span>
-  </div>
-  <div ng-show="currentUser" class='week hidden-xs'>
+<input type="checkbox" id="sidebartoggler" name="" value="">
+<!--  -->
+<div class="page-wrap">
+  <nav class="main-nav navbar navbar-fixed-top navbar-transparent" ng-show="currentUser">
+    <div class="navbar-header">
+      <label for="sidebartoggler" class="toggle"><img src="/img/logo.png" alt="logo" class="site-logo">&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+      </label>
+    </div>
+    <div ng-show="currentUser" class='week hidden-xs'></div>
     <div ng-show="currentUser" class='day hidden-xs'></div>
     <div ng-show="currentUser" class='month hidden-xs'></div>
     <div ng-show="currentUser" class='year hidden-xs'></div>
-    <div class='clock hidden-xs'>
-      <div class='hour hidden-xs'></div>
-      <div class='minutes hidden-xs'></div>
-      <div class='seconds hidden-xs'></div>
-      <div class="weather pull-right" ng-controller="ApiCtrl">
-        <p2>{{weather.name}}</p2>
-        <p2>{{weather.main.temp}}°</p2>
-        <p2>{{weather.weather[0].description}}</p2>
+    <div class='clock hidden-xs'></div>
+    <div class='hour hidden-xs'></div>
+    <div class='minutes hidden-xs'></div>
+    <div class='seconds hidden-xs'></div>
+    <div class="weather pull-right" ng-controller="ApiCtrl">
+      <p2>{{weather.name}}</p2>
+      <p2>{{weather.main.temp}}°</p2>
+      <p2>{{weather.weather[0].description}}</p2>
+    </div>
+  </nav>  
+  <div class="sidebar" ng-controller="GroupCtrl">
+    <p>Profile</p>
+     <!--  <input type="text" ng-model="x" ng-change="setX()" /> {{x}} -->
+    <ul ng-repeat = ' group in x'>
+      <p>{{group.title}}</p>
+    </ul>
+  <!-- {{x}} -->
+    <ul ng-repeat="group in groups">
+      <li ng-click="groupDetials(group)">{{group.title}}</li>
+    </ul>
+    <ul ng-repeat="group in navGroup.navGroups">
+      <li>{{group.title}}</li>
+    </ul>
+  </div>
+</div>
+<div id="login-modal" tabindex="-1" role="dialog" class="modal fade">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div ng-show="err" class="alert alert-danger">{{err}}</div>
+        <form>
+          <div ng-show="signupMode" class="form-group">
+            <label for="">Name</label>
+            <input type="text" ng-model="user.displayName" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <label for="">Email</label>
+            <input type="text" ng-model="user.email" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <label for="">Password</label>
+            <input type="password" ng-model="user.password" class="form-control"/>
+          </div>
+          <div ng-show="signupMode" class="form-group">
+            <label for="">Confirm Password</label>
+            <input type="password" ng-model="user.confirm" class="form-control"/>
+          </div>
+        </form>
       </div>
-    </nav>
-
-    <div id="login-modal" tabindex="-1" role="dialog" class="modal fade">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div ng-show="err" class="alert alert-danger">{{err}}</div>
-            <form>
-              <div ng-show="signupMode" class="form-group">
-                <label for="">Name</label>
-                <input type="text" ng-model="user.displayName" class="form-control"/>
-              </div>
-              <div class="form-group">
-                <label for="">Email</label>
-                <input type="text" ng-model="user.email" class="form-control"/>
-              </div>
-              <div class="form-group">
-                <label for="">Password</label>
-                <input type="password" ng-model="user.password" class="form-control"/>
-              </div>
-              <div ng-show="signupMode" class="form-group">
-                <label for="">Confirm Password</label>
-                <input type="password" ng-model="user.confirm" class="form-control"/>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer"><a ng-click="signupMode = true" ng-hide="signupMode" class="btn btn-link">Sign Up</a>
-            <button type="submit" ng-hide="signupMode" ng-click="login()" class="btn btn-info">Log In</button><a ng-click="signupMode = false" ng-show="signupMode" class="btn btn-link">Login</a>
-            <button type="submit" ng-cloak="" ng-show="signupMode" ng-click="signup()" class="btn btn-info">Sign Up</button>
-          </div>
-          <a class="btn btn-block btn-social btn-facebook" ng-click="authenticate('facebook')">
-            <span class="fa fa-facebook"></span>
-              Sign in with Facebook
-          </a>
+      <div class="modal-footer"><a ng-click="signupMode = true" ng-hide="signupMode" class="btn btn-link">Sign Up</a>
+        <button type="submit" ng-hide="signupMode" ng-click="login()" class="btn btn-info">Log In</button><a ng-click="signupMode = false" ng-show="signupMode" class="btn btn-link">Login</a>
+        <button type="submit" ng-cloak="" ng-show="signupMode" ng-click="signup()" class="btn btn-info">Sign Up</button>
+      </div>
+      <a class="btn btn-block btn-social btn-facebook" ng-click="authenticate('facebook')">
+        <span class="fa fa-facebook"></span>
+        Sign in with Facebook
+      </a>
 <!--           <a class="btn btn-block btn-social btn-twitter">
             <span class="fa fa-twitter"></span>
               Sign in with Twitter
-          </a> -->
-          <a class="btn btn-block btn-social btn-google" ng-click="authenticate('google')">
-            <span class="fa fa-google"></span>
+            </a> -->
+            <a class="btn btn-block btn-social btn-google" ng-click="authenticate('google')">
+              <span class="fa fa-google"></span>
               Sign in with Google
-          </a>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div ng-show="currentUser">
-      <nav class="menu-nav" ng-controller="UsersCtrl">
-       <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open"/>
-       <label class="menu-open-button" for="menu-open">
-         <span class="hamburger hamburger-1"></span>
-         <span class="hamburger hamburger-2"></span>
-         <span class="hamburger hamburger-3"></span>
-       </label>
-       <a href="#" ng-click="logout()" class="menu-item">
-         <ng-md-icon icon="exit_to_app" style="fill:white"></ng-md-icon>
-       </a>
-       <a href="/events" class="menu-item">
-         <ng-md-icon icon="event_note" style="fill:white"></ng-md-icon>
-       </a>
-       <a href="/tasks" class="menu-item">
-         <ng-md-icon icon="rate_review" style="fill:white"></ng-md-icon>
-       </a>
-       <a href="/notes" class="menu-item">
-         <ng-md-icon icon="note_add" style="fill:white"></ng-md-icon>
-       </a>      
-       <a href="/dashboard" class="menu-item">
-         <ng-md-icon icon="dashboard" style="fill:white"></ng-md-icon>
-       </a>
-       <a href="/groups" class="menu-item">
-         <!-- <img src="{{user.picture}}"> -->
-         <ng-md-icon icon="group" style="fill:white"></ng-md-icon>
-       </a>
-     </nav>
-   </div>
+      <div ng-show="currentUser">
+        <nav class="menu-nav" ng-controller="UsersCtrl">
+         <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open"/>
+         <label class="menu-open-button" for="menu-open">
+           <span class="hamburger hamburger-1"></span>
+           <span class="hamburger hamburger-2"></span>
+           <span class="hamburger hamburger-3"></span>
+         </label>
+         <a href="#" ng-click="logout()" class="menu-item">
+           <ng-md-icon icon="exit_to_app" style="fill:white"></ng-md-icon>
+         </a>
+         <a href="/events" class="menu-item">
+           <ng-md-icon icon="event_note" style="fill:white"></ng-md-icon>
+         </a>
+         <a href="/tasks" class="menu-item">
+           <ng-md-icon icon="rate_review" style="fill:white"></ng-md-icon>
+         </a>
+         <a href="/notes" class="menu-item">
+           <ng-md-icon icon="note_add" style="fill:white"></ng-md-icon>
+         </a>      
+         <a href="/dashboard" class="menu-item">
+           <ng-md-icon icon="dashboard" style="fill:white"></ng-md-icon>
+         </a>
+         <a href="/groups" class="menu-item">
+           <!-- <img src="{{user.picture}}"> -->
+           <ng-md-icon icon="group" style="fill:white"></ng-md-icon>
+         </a>
+       </nav>
+     </div>
 
 

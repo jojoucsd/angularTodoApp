@@ -4,11 +4,12 @@
 		<p>{{group.title}}</p>
 		<p>{{group.description}}</p>
 		<p>{{group.owner}}</p>
+		<p>{{Owner}}</p>
 		<a href="#" class="pull-right" ng-click="jointGroup(group, user); userFound=true">
 		 <ng-md-icon ng-hide="userFound" icon="person_add" style="fill:black"></ng-md-icon>	
 		</a>
 		<a href='#' class='pull-right' ng-click="unjointGroup(group, user)">
-		 <ng-md-icon icon="error" ng-show="ownerFound()" style="fill:black"></ng-md-icon>
+		 <ng-md-icon icon="error" ng-hide="Owner" style="fill:black"></ng-md-icon>
 		 </a>
 		<br>
 		<div class ='card'><br/>

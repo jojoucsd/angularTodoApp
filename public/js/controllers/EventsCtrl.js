@@ -65,10 +65,10 @@ angular.module('d2r-app')
 	}
 
 	$scope.updateEvent = function(event){
-	  console.log('update', event)
+		console.log('update', event.day)
 	  $http.put('/api/events/'+ event._id, event)
 	  .success(function(response){
-	    console.log(response)
+	    // console.log(response)
 	    event.editForm = false;
 	  })
 	  // console.log('edit', post);
