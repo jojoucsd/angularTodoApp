@@ -3,7 +3,8 @@
  */
 
 require('dotenv').load();
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+// process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
 var config = require('./config')
   , express = require('express')
