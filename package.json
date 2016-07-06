@@ -4,6 +4,7 @@
   "description": "Auth skeleton for MEAN stack.",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "mocha",
     "postinstall": "bower cache clean && bower install"
   },
