@@ -18,7 +18,13 @@ var config = require('./config')
   , server = app.listen(config.port)
   , mongoose  = require('mongoose')
 
-mongoose.connect(config.db);
+// mongoose.connect(config.db);
+
+mongoose.connect(
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/d2rAngular' // plug in the db name you've been using
+);
 
 app.use("/", express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
