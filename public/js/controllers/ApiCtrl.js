@@ -12,7 +12,7 @@ angular.module('d2r-app')
 				var lat = position.coords.latitude;
 				var lon = position.coords.longitude;		
 				var query = "lat=" + lat + "&lon=" + lon;
-				var url = "http://api.openweathermap.org/data/2.5/";
+				var url = "https://api.openweathermap.org/data/2.5/";
 				var unit = "&units=imperial";
 				var key = "&appid=c55ec823be46f88fbcf55db70cc8e772";
 				$http.jsonp(url+ "weather?" + query + unit + key + "&callback=JSON_CALLBACK").success(function(response){
@@ -27,13 +27,13 @@ angular.module('d2r-app')
 	}
 
 
-	_500px.api('/photos', { feature: 'popular', image_size: 6, sort: 'highest_rating', category: 8 }, function (response) {
-		if (response.success) {
-			$('#results').prepend("<img class='third-slide' id='splashimg' src='"+ response.data.photos[getRandomInt(0,20)].image_url + "'>");
-		} else {
-			console.log('Unable to complete request: ' + response.status + ' - ' + response.error_message);
-		}
-	});	
+	// _500px.api('/photos', { feature: 'popular', image_size: 6, sort: 'highest_rating', category: 8 }, function (response) {
+	// 	if (response.success) {
+	// 		$('#results').prepend("<img class='third-slide' id='splashimg' src='"+ response.data.photos[getRandomInt(0,20)].image_url + "'>");
+	// 	} else {
+	// 		console.log('Unable to complete request: ' + response.status + ' - ' + response.error_message);
+	// 	}
+	// });	
 
 	// Tab Form on Dash
 	$scope.tabs = [{
