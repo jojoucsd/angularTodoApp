@@ -67,15 +67,7 @@ angular.module('d2r-app.services', [])
      $rootScope.$broadcast('event:x');
    }
  }
-})
-
-.config(['$httpProvider', function ($httpProvider) {
-  //Reset headers to avoid OPTIONS request (aka preflight)
-  $httpProvider.defaults.headers.common = {};
-  $httpProvider.defaults.headers.post = {};
-  $httpProvider.defaults.headers.put = {};
-  $httpProvider.defaults.headers.patch = {};
-}]);
+});
 
 // .service('srvShareData', function($window) {
 //   var KEY = 'App.SelectedValue';
