@@ -16,8 +16,8 @@
     <div class='seconds hidden-xs'></div>
     <div class="weather pull-right" ng-controller="ApiCtrl">
       <p2>{{weather.name}}</p2>
-      <p2>{{weather.main.temp}}°</p2>
-      <p2>{{weather.weather[0].description}}</p2>
+      <p2>{{weather.currently.temperature}}°</p2>
+      <p2>{{weather.currently.summary}}</p2>
     </div>
   </nav>  
   <div class="sidebar" ng-controller="GroupCtrl">

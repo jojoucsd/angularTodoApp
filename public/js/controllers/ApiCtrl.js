@@ -12,12 +12,18 @@ angular.module('d2r-app')
 				var lat = position.coords.latitude;
 				var lon = position.coords.longitude;		
 				var query = "lat=" + lat + "&lon=" + lon;
-				var url = "//api.openweathermap.org/data/2.5/";
+				// var url = "//api.openweathermap.org/data/2.5/";
+				var url1 ="https://api.forecast.io/forecast/"
 				var unit = "&units=imperial";
-				var key = "&appid=325eb4a6e7af80ea40b557e093f01b04";
-				$http.jsonp(url+ "weather?" + query + unit + key + "&callback=JSON_CALLBACK").success(function(response){
+				// var key = "&appid=325eb4a6e7af80ea40b557e093f01b04";
+				var APIkey = "39361e88cf2b3005a2f1fbf44252801b/"
+				// $http.jsonp(url+ "weather?" + query + unit + key + "&callback=JSON_CALLBACK").success(function(response){
+				// 	$scope.weather = response;
+				// });
+				$http.jsonp(url1 + APIkey + lat + "," + lon + "?callback=JSON_CALLBACK").success(function(response){
 					$scope.weather = response;
-				});
+					console.log('forcast io api', response)
+				})
 			});
 		});
 	}
@@ -26,6 +32,7 @@ angular.module('d2r-app')
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 
+	https://api.forecast.io/forecast/APIKEY/LATITUDE,LONGITUDE
 
 	// _500px.api('/photos', { feature: 'popular', image_size: 6, sort: 'highest_rating', category: 8 }, function (response) {
 	// 	if (response.success) {
@@ -82,21 +89,21 @@ angular.module('d2r-app')
 		console.log('err',err)
 	})
 
-	$scope.types = ['hot'];		  		
-	$scope.subredit="worldnews";			
-	$scope.type="new";
+	// $scope.types = ['hot'];		  		
+	// $scope.subredit="worldnews";			
+	// $scope.type="new";
 
-	var url="https://api.reddit.com/r/"+$scope.subredit+"/?jsonp=JSON_CALLBACK";
-	console.log("we maded here")
-	$http.jsonp(url).success(function(data) {
-		$scope.elements = [];
-		var dataset = data.data.children;
-		for (var i=0; i<dataset.length; i++ ){
-					$scope.elements.push(dataset[i].data); // response data 
-					// console.log('reddit', $scope.elements)
-				}				
+	// var url="http://api.reddit.com/r/"+$scope.subredit+"/?jsonp=JSON_CALLBACK";
+	// console.log("we maded here")
+	// $http.jsonp(url).success(function(data) {
+	// 	$scope.elements = [];
+	// 	var dataset = data.data.children;
+	// 	for (var i=0; i<dataset.length; i++ ){
+	// 				$scope.elements.push(dataset[i].data); // response data 
+	// 				// console.log('reddit', $scope.elements)
+	// 			}				
 
-			});
+	// 		});
 
 	// $scope.NBA= APIService.getWork()
 
@@ -115,7 +122,7 @@ angular.module('d2r-app')
 	// };
 	// var key = '2b9f1a534dd54c359e101c94bc7547aa'
 	// $http.defaults.headers.common["Ocp-Apim-Subscription-Key"] = key
-	var headers = {'Ocp-Apim-Subscription-Key': '2b9f1a534dd54c359e101c94bc7547aa'}
+	// var headers = {'Ocp-Apim-Subscription-Key': '2b9f1a534dd54c359e101c94bc7547aa'}
 	// $scope.nba = function() {
 	// 	var url = 'https://api.fantasydata.net/nba/v2/JSON/News?callback=JSON_CALLBACK'
 	// 	// $http.defaults.headers.common["Ocp-Apim-Subscription-Key"] = '2b9f1a534dd54c359e101c94bc7547aa';
