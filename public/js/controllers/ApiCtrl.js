@@ -12,7 +12,7 @@ angular.module('d2r-app')
 				var lat = position.coords.latitude;
 				var lon = position.coords.longitude;		
 				var query = "lat=" + lat + "&lon=" + lon;
-				var url = "http://api.openweathermap.org/data/2.5/";
+				var url = "//api.openweathermap.org/data/2.5/";
 				var unit = "&units=imperial";
 				var key = "&appid=325eb4a6e7af80ea40b557e093f01b04";
 				$http.jsonp(url+ "weather?" + query + unit + key + "&callback=JSON_CALLBACK").success(function(response){
