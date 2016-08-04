@@ -1,16 +1,17 @@
-var Post = require('../models/post.js')
-, User = require('../models/user.js')
-, auth = require('./auth')
+var auth = require('./auth')
+, config = require('../config.js')
+, request = require('request')
 
 module.exports = function(app) {
-	app.post('/api/weather', function (req,res) {
-		console.log('API Call', req.body)
-		var url = "http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=e500ec79dcb6f2880bc5fc1e39bdc10e"; 
+	app.post('/api/sportnews', function (req,res) {
+		console.log('API Call')
+		var url = "https://fantasydata.com/rss/rotoworld/?format=jsonp"; 
 		request(url, function (error, response) {
-			if (err) {
-			    console.log(err) // Show the HTML for the Google homepage. 
+			if (error) {
+			    console.log(error) // Show the HTML for the Google homepage. 
 			}
-			res.send(response);					
+			console.log('RSS Sport', response.body)
+			res.send(response.body);					
 		})
 	})
 }

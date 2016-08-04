@@ -13,7 +13,8 @@ angular.module('d2r-app', ['d2r-app.services',
 
     .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
       $routeProvider.when('/', {
-        templateUrl: 'templates/splash'
+        templateUrl: 'templates/splash',
+        controller: 'ApiCtrl'
       });
 
       $routeProvider.when('/profile', {

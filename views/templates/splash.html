@@ -14,8 +14,15 @@
 							</a>
 						</div>
 					</li>
+					<li ng-repeat="sport in sports | limitTo:20">
+						<div>
+							<a href="{{sport.Url}}" target="#">
+								{{sport.Title}}
+							</a>
+						</div>
+					</li>
 				</ul>
-			</div>      
+			</div>    
 		</div>
 	</div>
 </div>

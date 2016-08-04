@@ -28,9 +28,29 @@ angular.module('d2r-app')
 		});
 	}
 
+	console.log('Making API Call from Backend')
+	$http.post('/api/sportnews').success(function(data){
+		console.log('news return', data)
+		// angular.forEach(data.body, function(value, key){
+		// 	console.log(key + ': ' + value);
+		// })
+		$scope.sports = data
+	})
+	// var url = 'https://fantasydata.com/rss/rotoworld/?format=jsonp'
+	// $http.jsonp(url)
+	// .success(function(data){
+	// 	console.log('sports', data)
+	// })
+	// .error(function(data, err){
+	// 	console.log('sport data' , data)
+	// 	console.log('sport err' , err)
+	// })
+
+
 	function getRandomInt(min, max) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
+
 
 	https://api.forecast.io/forecast/APIKEY/LATITUDE,LONGITUDE
 
@@ -76,7 +96,7 @@ angular.module('d2r-app')
 	var url3 = 'https://hacker-news.firebaseio.com/v0/item/8863.json?print=pretty&callback=JSON_CALLBACK'		
 	var url4 = 'https://api.nytimes.com/svc/topstories/v2/home.jsonp?api-key=b9ccbfb3e60d48ce9c81dcc40406ab84&callback=angular.callbacks._1(json_response)'
 	var url5 = 'https://api.nytimes.com/svc/news/v3/content/all/all.jsonp?api-key=ccb58d5412a54799e82ad086c0387669:5:74719242&responce-format=.jsonp&callback=JSON_CALLBACK'
-
+	// var url6 = 'https://fantasydata.com/rss/rotoworld/?format=json&callback=JSON_CALLBACK'
 	$http({
 		method: 'JSONP',
 		url: url5 })

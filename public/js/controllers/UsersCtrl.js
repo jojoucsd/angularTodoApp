@@ -6,6 +6,7 @@ angular.module('d2r-app')
 .controller('UsersCtrl', ['$scope', '$http', '$auth', 'Auth', '$location', '$window','$routeParams', 'toastr', function($scope, $http, $auth, Auth, $location, $window, $routeParams, toastr) {
   $http.get('/api/me').success(function(data){
     $scope.user = data; 
+    console.log('user', data)
   })
 
   $scope.post = {};

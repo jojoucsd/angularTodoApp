@@ -5,7 +5,7 @@ var EventSchema = Schema({
   title  : String,
   description: String,
   location: Object,
-  date: Date,
+  date: { type: Date },
   created_at: { type: Date, default: Date.now() },
   updated_at: { type: Date },
   user : {type: Schema.Types.ObjectId, ref: 'User'},
